@@ -5,13 +5,20 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.R
-import com.example.myapplication.presentation.main_app.models.PictureInfo
+import com.example.myapplication.domain.model.PictureInfo
+
+lateinit var favorite: SnapshotStateList<Boolean>
 
 @ExperimentalFoundationApi
 @Composable
@@ -22,36 +29,49 @@ fun MainGrid() {
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
+        favorite = mutableStateListOf()
+        for (i in 0..gridList.size) favorite.add(false)
         items(
             count = gridList.size,
             itemContent = {
-                MenuListItem(gridList[it])
+                MenuListItem(gridList[it], it)
             }
         )
     }
 }
 
 @Composable
-fun MenuListItem(menuItem: PictureInfo) {
+fun MenuListItem(menuItem: PictureInfo, index: Int) {
     Column() {
-        val scale = 1.1
-        Box(){
-            Image(
-                painter = painterResource(id = R.drawable.grid_item),
-                contentDescription = null,
-                modifier = Modifier
-                    .size((160 * scale).dp, (222 * scale).dp)
-            )
-            Image(
-                painter = painterResource(id = R.drawable.grid_item),
-                contentDescription = null,
-                modifier = Modifier
-                    .size((160 * scale).dp, (222 * scale).dp)
-            )
-        }
-
+        MenuListImage(menuItem = menuItem, index = index)
         Text(text = menuItem.title)
 
+    }
+}
+
+@Composable
+fun MenuListImage(menuItem: PictureInfo, index: Int) {
+    val scale = 1.1
+    Box() {
+        Image(
+            painter = painterResource(id = R.drawable.grid_item),
+            contentDescription = null,
+            modifier = Modifier
+                .size((160 * scale).dp, (222 * scale).dp)
+        )
+        IconButton(
+            onClick = { favorite[index] = !favorite[index] },
+            modifier = Modifier.padding(130.dp, 0.dp, 0.dp, 0.dp),
+
+        ) {
+            Icon(
+                painter = painterResource(
+                    id = if (favorite[index]) R.drawable.ic_favorite else R.drawable.ic_unfavorite
+                ),
+                contentDescription = null,
+                tint = Color.White
+            )
+        }
     }
 }
 
