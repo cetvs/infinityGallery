@@ -40,7 +40,7 @@ fun MyApplicationTheme(
 
     MaterialTheme(
         colors = colors,
-        typography = Typography,
+        typography = MontserratTypography,
         shapes = Shapes,
         content = content
     )
