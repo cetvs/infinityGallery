@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myapplication.R
 import com.example.myapplication.domain.model.PictureInfo
 
@@ -22,7 +23,10 @@ lateinit var favorite: SnapshotStateList<Boolean>
 
 @ExperimentalFoundationApi
 @Composable
-fun MainGrid() {
+fun MainGrid(
+    mainViewModel: MainViewModel = hiltViewModel()
+) {
+    mainViewModel.getPictureInfo()
     LazyVerticalGrid(
         cells = GridCells.Fixed(2),
         modifier = Modifier.padding(16.dp, 16.dp, 0.dp, 16.dp),

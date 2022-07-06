@@ -10,20 +10,29 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainViewModel {
-    @HiltViewModel
-    class MenuViewModel @Inject constructor(
-        private val mainUseCases: MainUseCases
-    ) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val mainUseCases: MainUseCases
+) : ViewModel() {
 
-        fun getPictureInfo(): Flow<List<PictureInfo>> {
-            return mainUseCases.getPictureInfo()
-        }
+    fun getFavoritePictureInfo(): Flow<List<PictureInfo>> {
+        return mainUseCases.getFavoritePictureInfo()
+    }
 
-        fun addFavoritePictureInfo(pictureInfo: PictureInfo) {
-            viewModelScope.launch(Dispatchers.IO) {
-                mainUseCases.addFavoritePictureInfo(pictureInfo)
-            }
+    fun getPictureInfo() {
+        viewModelScope.launch(Dispatchers.IO) {
+            mainUseCases.getPictureInfo()
         }
     }
+
+//        fun getPictureInfo(): Flow<List<PictureInfo>> {
+//            return mainUseCases.getPictureInfo()
+//        }
+
+    fun addFavoritePictureInfo(pictureInfo: PictureInfo) {
+        viewModelScope.launch(Dispatchers.IO) {
+            mainUseCases.addFavoritePictureInfo(pictureInfo)
+        }
+    }
+
 }

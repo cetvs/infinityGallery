@@ -17,7 +17,8 @@ import com.example.myapplication.presentation.main_app.MainGrid
 
 @ExperimentalFoundationApi
 @Composable
-fun MainScreen() {
+fun MainScreen(
+) {
     Column() {
         TopAppBar(
             backgroundColor = Color.White,
