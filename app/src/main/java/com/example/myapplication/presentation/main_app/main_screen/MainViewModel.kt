@@ -23,24 +23,36 @@ class MainViewModel @Inject constructor(
     private val _state = mutableStateOf(PictureInfoListState())
     val state: State<PictureInfoListState> = _state
 
+//    private val _state = mutableStateOf(listOf<PictureInfo>())
+//    val state: State<List<PictureInfo>> = _state
+
     fun getFavoritePictureInfo(): Flow<List<PictureInfo>> {
         return mainUseCases.getFavoritePictureInfo()
     }
 
+//    fun getPictureInfo() {
+//        mainUseCases.getPictureInfo().onEach { result ->
+//            when (result) {
+//                is Resource.Success ->
+//                    _state.value = PictureInfoListState(value = result.data ?: listOf())
+//                is Resource.Error ->
+//                    _state.value = PictureInfoListState(error = "An unexpected error occured")
+//                is Resource.Loading ->
+//                    _state.value = PictureInfoListState(isLoading = true)
+//            }
+//        }.launchIn(viewModelScope)
+//    }
+
     fun getPictureInfo() {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            mainUseCases.getPictureInfo()
-//        }
         mainUseCases.getPictureInfo().onEach { result ->
             when (result) {
-                is Resource.Success -> _state.value =
-                    PictureInfoListState(value = result.data ?: listOf())
-                is Resource.Error -> _state.value =
-                    PictureInfoListState(error = "An unexpected error occured")
-                is Resource.Loading -> _state.value = PictureInfoListState(isLoading = true)
+                is Resource.Success ->
+                    if (result.data != null) _state.value =
+                        PictureInfoListState(value = result.data)
+                else -> if (result.data != null) _state.value =
+                    PictureInfoListState(value = result.data)
             }
         }.launchIn(viewModelScope)
-
     }
 
     fun addFavoritePictureInfo(pictureInfo: PictureInfo) {
