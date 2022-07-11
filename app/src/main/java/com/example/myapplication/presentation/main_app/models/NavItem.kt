@@ -2,26 +2,32 @@ package com.example.myapplication.presentation.main_app.models
 
 import com.example.myapplication.R
 
-sealed class BottomNavItem(
+sealed class NavItem(
     val name: String,
     val route: String,
-    val icon: Int,
+    val icon: Int?,
 ) {
-    object Main : BottomNavItem(
+    object Main : NavItem(
         route = "main",
         name = "Главная",
         icon = R.drawable.ic_main
     )
 
-    object Favorite : BottomNavItem(
+    object Favorite : NavItem(
         route = "favorite",
         name = "Избранное",
-        icon =  R.drawable.ic_favorite
+        icon = R.drawable.ic_favorite
     )
 
-    object Profile : BottomNavItem(
+    object Profile : NavItem(
         route = "profile",
         name = "Профиль",
         icon = R.drawable.ic_profile
+    )
+
+    object Details : NavItem(
+        route = "profile",
+        name = "Профиль",
+        icon = null
     )
 }

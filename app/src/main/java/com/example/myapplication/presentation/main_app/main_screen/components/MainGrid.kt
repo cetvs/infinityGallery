@@ -14,14 +14,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.myapplication.R
 import com.example.myapplication.domain.model.PictureInfo
 import com.example.myapplication.presentation.main_app.main_screen.MainViewModel
+import com.example.myapplication.presentation.main_app.models.NavItem
 
 @ExperimentalFoundationApi
 @Composable
 fun MainGrid(
+    navController: NavHostController,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
     val pictureInfoListState = mainViewModel.state.value
@@ -35,15 +38,15 @@ fun MainGrid(
         items(
             count = pictureInfoListState.value.size,
             itemContent = {
-                MenuListItem(pictureInfoListState.value[it], it)
+                MenuListItem(pictureInfoListState.value[it], it, navController)
             }
         )
     }
 }
 
 @Composable
-fun MenuListItem(menuItem: PictureInfo, index: Int) {
-    Column(Modifier.clickable {  }) {
+fun MenuListItem(menuItem: PictureInfo, index: Int, navController: NavHostController) {
+    Column(Modifier.clickable { navController.navigate(NavItem.Details.route) }) {
         MenuListImage(menuItem = menuItem, index = index)
         Text(text = menuItem.title)
     }

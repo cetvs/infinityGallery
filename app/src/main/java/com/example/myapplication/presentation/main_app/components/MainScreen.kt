@@ -13,12 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.myapplication.presentation.main_app.main_screen.components.MainGrid
 
 @ExperimentalFoundationApi
 @Composable
-fun MainScreen(
-) {
+fun MainScreen(navController: NavHostController) {
     Column() {
         TopAppBar(
             backgroundColor = Color.White,
@@ -35,7 +35,7 @@ fun MainScreen(
                 }
             }
         )
-        MainGrid()
+        MainGrid(navController)
     }
 }
 
