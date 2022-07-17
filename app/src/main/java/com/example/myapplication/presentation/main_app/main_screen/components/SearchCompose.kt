@@ -1,19 +1,20 @@
 package com.example.myapplication.presentation.main_app.main_screen.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,7 +27,6 @@ import com.example.myapplication.presentation.ui.theme.SearchLightGray
 @Preview
 @Composable
 fun SearchCompose() {
-    var textFieldValue by remember { mutableStateOf(TextFieldValue("")) }
     Row {
         Icon(
             painter = painterResource(id = R.drawable.ic_back),
@@ -38,45 +38,77 @@ fun SearchCompose() {
                 .fillMaxWidth()
                 .padding(0.dp, 9.dp, 16.dp, 0.dp),
         ) {
-            BasicTextField(
-                modifier = Modifier
-                    .background(
-                        SearchLightGray, RoundedCornerShape(40.dp)
-                    )
-                    .fillMaxWidth()
-                    .height(47.dp),
-                value = textFieldValue,
-                onValueChange = {
-                    textFieldValue = it
-                },
-                singleLine = true,
-//                cursorBrush = Color.White,
-                textStyle = TextStyle(color = Color.Black, fontSize = 14.sp),
-                decorationBox = { innerTextField ->
-                    Row(
-                        modifier = Modifier.padding(16.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            painter = painterResource(
-                                R.drawable.ic_search_15
-                            ),
-                            contentDescription = null,
-                            tint = Color.White
-                        )
-                        if (textFieldValue.text.isEmpty()) {
-                            Text(
-                                text = "Поиск",
-                                style = TextStyle(color = HintGray, fontSize = 14.sp)
-                            )
-                        }
-                        innerTextField()
-                    }
-                }
-            )
+            SearchTextField()
         }
     }
 }
+
+@Preview
+@Composable
+fun SearchTextField() {
+    var textFieldValue by remember { mutableStateOf(TextFieldValue("")) }
+    val focusManager = LocalFocusManager.current
+    BasicTextField(
+        modifier = Modifier
+            .background(SearchLightGray, RoundedCornerShape(40.dp))
+            .fillMaxWidth()
+            .height(44.dp),
+        value = textFieldValue,
+        onValueChange = { textFieldValue = it },
+        singleLine = true,
+        textStyle = TextStyle(color = Color.Black, fontSize = 14.sp),
+        decorationBox = { innerTextField ->
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Icon(
+                    painter = painterResource(
+                        R.drawable.ic_search_15
+                    ),
+                    contentDescription = null,
+                    modifier = Modifier.padding(12.dp),
+                    tint = HintGray
+                )
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    if (textFieldValue.text.isEmpty()) {
+                        Text(
+                            text = stringResource(R.string.search_hint),
+                            style = TextStyle(color = HintGray, fontSize = 14.sp)
+                        )
+                    } else {
+                        innerTextField()
+                    }
+                    IconButton(onClick = {textFieldValue = TextFieldValue("")}) {
+                        Icon(
+                            painter = painterResource(
+                                R.drawable.ic_close_circle_line
+                            ),
+                            contentDescription = null,
+                            modifier = Modifier.alpha(if (textFieldValue.text.isEmpty()) 0f else 1f),
+                            tint = HintGray
+                        )
+                    }
+                }
+            }
+        }
+    )
+}
+
+//изменить падинг '1.2.0-alpha04'
+//                    TextFieldDefaults.TextFieldDecorationBox(
+//                        value = "value",
+//                        visualTransformation = visualTransformation,
+//                        innerTextField = innerTextField,
+//                        singleLine = singleLine,
+//                        enabled = enabled,
+//                        interactionSource = interactionSource,
+//                        contentPadding = PaddingValues(0.dp), // this is how you can remove the padding
+//                    )
 
 //BasicTextField(
 //    value = text,
@@ -99,7 +131,6 @@ fun SearchCompose() {
 //    disabledIndicatorColor = Color.Transparent
 //    )
 //)
-
 
 
 //    TextField(
