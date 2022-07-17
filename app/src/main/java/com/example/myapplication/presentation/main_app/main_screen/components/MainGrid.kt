@@ -46,7 +46,11 @@ fun MainGrid(
 
 @Composable
 fun MenuListItem(menuItem: PictureInfo, index: Int, navController: NavHostController) {
-    Column(Modifier.clickable { navController.navigate(NavItem.Details.route) }) {
+    Column(Modifier.clickable {
+        val arguments = navController.currentBackStackEntry?.arguments
+        arguments?.putParcelable("MENU_ITEM", menuItem)
+        navController.navigate(NavItem.Details.route)
+    }) {
         MenuListImage(menuItem = menuItem, index = index)
         Text(text = menuItem.title)
     }

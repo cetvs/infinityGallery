@@ -16,7 +16,7 @@ sealed class NavItem(
     object Favorite : NavItem(
         route = "favorite",
         name = "Избранное",
-        icon = R.drawable.ic_favorite
+        icon = R.drawable.ic_unfavorite
     )
 
     object Profile : NavItem(
@@ -26,8 +26,8 @@ sealed class NavItem(
     )
 
     object Details : NavItem(
-        route = "profile",
-        name = "Профиль",
+        route = "details",
+        name = "Детали",
         icon = null
     )
 }

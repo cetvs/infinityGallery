@@ -1,9 +1,12 @@
 package com.example.myapplication.domain.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "pictureInfo")
 data class PictureInfo(
     @PrimaryKey
@@ -17,4 +20,4 @@ data class PictureInfo(
     val photoUrl: String,
     @SerializedName("publicationDate")
     val publicationDate: Long,
-)
+) : Parcelable
