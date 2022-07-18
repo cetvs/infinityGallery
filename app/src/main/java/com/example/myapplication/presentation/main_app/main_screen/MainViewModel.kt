@@ -49,6 +49,8 @@ class MainViewModel @Inject constructor(
                 is Resource.Success ->
                     if (result.data != null) _state.value =
                         PictureInfoListState(value = result.data)
+                is Resource.Loading ->
+                    _state.value = PictureInfoListState(isLoading = true)
                 else -> if (result.data != null) _state.value =
                     PictureInfoListState(value = result.data)
             }

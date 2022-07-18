@@ -28,13 +28,13 @@ fun MainScreenContent(
     navController: NavHostController,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
-    val pictureInfoListState = mainViewModel.state.value
-    mainViewModel.getPictureInfo()
-    if(pictureInfoListState.error.isEmpty()) {
+//    val pictureInfoListState = mainViewModel.state.value
+//    mainViewModel.getPictureInfo()
+//    if (pictureInfoListState.error.isEmpty()) {
         MainGrid(navController, pictureInfoListState)
-    } else {
-        ErrorMainContent()
-    }
+//    } else {
+//        ErrorMainContent()
+//    }
 }
 
 
