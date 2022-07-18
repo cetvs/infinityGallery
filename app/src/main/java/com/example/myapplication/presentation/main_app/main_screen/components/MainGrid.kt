@@ -19,16 +19,28 @@ import coil.compose.AsyncImage
 import com.example.myapplication.R
 import com.example.myapplication.domain.model.PictureInfo
 import com.example.myapplication.presentation.main_app.main_screen.MainViewModel
+import com.example.myapplication.presentation.main_app.main_screen.PictureInfoListState
 import com.example.myapplication.presentation.main_app.models.NavItem
 
 @ExperimentalFoundationApi
 @Composable
-fun MainGrid(
+fun MainScreenContent(
     navController: NavHostController,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
     val pictureInfoListState = mainViewModel.state.value
     mainViewModel.getPictureInfo()
+    if(pictureInfoListState.error.isEmpty()) {
+        MainGrid(navController, pictureInfoListState)
+    } else {
+        ErrorMainContent()
+    }
+}
+
+
+@ExperimentalFoundationApi
+@Composable
+fun MainGrid(navController: NavHostController, pictureInfoListState: PictureInfoListState) {
     LazyVerticalGrid(
         cells = GridCells.Fixed(2),
         modifier = Modifier.padding(16.dp, 16.dp, 0.dp, 16.dp),

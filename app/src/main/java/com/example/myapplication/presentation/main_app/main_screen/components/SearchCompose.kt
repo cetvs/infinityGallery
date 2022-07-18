@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -24,15 +23,16 @@ import com.example.myapplication.R
 import com.example.myapplication.presentation.ui.theme.HintGray
 import com.example.myapplication.presentation.ui.theme.SearchLightGray
 
-@Preview
 @Composable
-fun SearchCompose() {
+fun SearchCompose(isSearchState: MutableState<Boolean>) {
     Row {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_back),
-            contentDescription = null,
-            modifier = Modifier.padding(14.dp, 17.dp, 20.dp, 0.dp),
-        )
+        IconButton(onClick = {isSearchState.value = false}) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_back),
+                contentDescription = null,
+                modifier = Modifier.padding(15.dp, 12.dp, 20.dp, 0.dp),
+            )
+        }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -47,7 +47,6 @@ fun SearchCompose() {
 @Composable
 fun SearchTextField() {
     var textFieldValue by remember { mutableStateOf(TextFieldValue("")) }
-    val focusManager = LocalFocusManager.current
     BasicTextField(
         modifier = Modifier
             .background(SearchLightGray, RoundedCornerShape(40.dp))
