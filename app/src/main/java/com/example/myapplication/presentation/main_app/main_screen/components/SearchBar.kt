@@ -19,14 +19,17 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.myapplication.R
 import com.example.myapplication.presentation.ui.theme.HintGray
 import com.example.myapplication.presentation.ui.theme.SearchLightGray
 
 @Composable
-fun SearchCompose(isSearchState: MutableState<Boolean>) {
+fun SearchBar(
+    navController: NavHostController
+) {
     Row {
-        IconButton(onClick = {isSearchState.value = false}) {
+        IconButton(onClick = { navController.popBackStack() }) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_back),
                 contentDescription = null,
@@ -82,7 +85,7 @@ fun SearchTextField() {
                     } else {
                         innerTextField()
                     }
-                    IconButton(onClick = {textFieldValue = TextFieldValue("")}) {
+                    IconButton(onClick = { textFieldValue = TextFieldValue("") }) {
                         Icon(
                             painter = painterResource(
                                 R.drawable.ic_close_circle_line

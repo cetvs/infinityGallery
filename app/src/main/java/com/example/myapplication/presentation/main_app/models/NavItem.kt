@@ -30,4 +30,10 @@ sealed class NavItem(
         name = "Детали",
         icon = null
     )
+
+    object Search : NavItem(
+        route = "search",
+        name = "Поиск",
+        icon = null
+    )
 }

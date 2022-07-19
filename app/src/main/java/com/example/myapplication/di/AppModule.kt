@@ -7,9 +7,9 @@ import com.example.myapplication.data.source.local.AppDatabase
 import com.example.myapplication.data.source.remote.Constants
 import com.example.myapplication.data.source.remote.SimpleApi
 import com.example.myapplication.domain.repository.MainRepository
-import com.example.myapplication.domain.usecase.AddFavoritePictureInfo
-import com.example.myapplication.domain.usecase.GetFavoritePictureInfo
+import com.example.myapplication.domain.usecase.GetLocalPictureInfo
 import com.example.myapplication.domain.usecase.GetPictureInfo
+import com.example.myapplication.domain.usecase.InsertPicturesInfo
 import com.example.myapplication.domain.usecase.MainUseCases
 import dagger.Module
 import dagger.Provides
@@ -59,8 +59,8 @@ object AppModule {
     fun provideMenuUseCases(mainRepository: MainRepository): MainUseCases {
         return MainUseCases(
             getPictureInfo = GetPictureInfo(mainRepository),
-            addFavoritePictureInfo = AddFavoritePictureInfo(mainRepository),
-            getFavoritePictureInfo = GetFavoritePictureInfo(mainRepository)
+            insertPicturesInfo = InsertPicturesInfo(mainRepository),
+            getLocalPictureInfo = GetLocalPictureInfo(mainRepository)
         )
     }
 }

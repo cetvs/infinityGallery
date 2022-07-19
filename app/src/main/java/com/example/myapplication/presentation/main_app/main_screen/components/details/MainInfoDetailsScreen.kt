@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.myapplication.R
@@ -36,7 +37,7 @@ fun TopBar() {
             )
         }
         Text(
-            text = GALLERY,
+            text = stringResource(R.string.Gallery),
             modifier = Modifier.padding(14.dp, 17.dp, 0.dp, 0.dp),
         )
     }
@@ -63,5 +64,3 @@ fun PictureInfoDetails(pictureInfo: PictureInfo) {
         )
     }
 }
-
-const val GALLERY = "Галерея"

@@ -24,17 +24,7 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @ExperimentalFoundationApi
 @Composable
-fun MainScreenContent(
-    navController: NavHostController,
-    mainViewModel: MainViewModel,
-) {
-    MainGrid(navController, mainViewModel)
-}
-
-
-@ExperimentalFoundationApi
-@Composable
-fun MainGrid(navController: NavHostController, mainViewModel: MainViewModel) {
+fun SearchGrid(navController: NavHostController, mainViewModel: MainViewModel) {
     val picturesState = mainViewModel.state.value
     SwipeRefresh(
         state = rememberSwipeRefreshState(false),
@@ -49,7 +39,7 @@ fun MainGrid(navController: NavHostController, mainViewModel: MainViewModel) {
             items(
                 count = picturesState.value.size,
                 itemContent = {
-                    MainGridListItem(picturesState.value[it], it, navController)
+                    SearchGridListItem(picturesState.value[it], it, navController)
                 }
             )
         }
@@ -57,21 +47,21 @@ fun MainGrid(navController: NavHostController, mainViewModel: MainViewModel) {
 }
 
 @Composable
-fun MainGridListItem(menuItem: PictureInfo, index: Int, navController: NavHostController) {
+fun SearchGridListItem(menuItem: PictureInfo, index: Int, navController: NavHostController) {
     Column(Modifier.clickable {
         val arguments = navController.currentBackStackEntry?.arguments
         arguments?.putParcelable("MENU_ITEM", menuItem)
         navController.navigate(NavItem.Details.route)
     }) {
-        MainGridListImage(menuItem = menuItem, index = index)
+        SearchGridListImage(menuItem = menuItem, index = index)
         Text(text = menuItem.title)
     }
 }
 
 @Composable
-fun MainGridListImage(menuItem: PictureInfo, index: Int) {
+fun SearchGridListImage(menuItem: PictureInfo, index: Int) {
     val scale = 1.1
-    Box() {
+    Box {
         AsyncImage(
             model = menuItem.photoUrl,
             contentDescription = null,
@@ -80,16 +70,13 @@ fun MainGridListImage(menuItem: PictureInfo, index: Int) {
         )
         IconButton(
             onClick = {
-//                favorite[index] = !favorite[index]
             },
             modifier = Modifier.padding(130.dp, 0.dp, 0.dp, 0.dp),
 
             ) {
             Icon(
                 painter = painterResource(
-//                    id = if (favorite[index])
                     R.drawable.ic_favorite
-//                    else R.drawable.ic_unfavorite
                 ),
                 contentDescription = null,
                 tint = Color.White

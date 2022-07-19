@@ -13,11 +13,11 @@ class MainRepositoryImpl(
     override suspend fun getPictureInfo(): List<PictureInfo> =
         simpleApi.getPictureInfo()
 
-    override fun getFavoritePictureInfo(): Flow<List<PictureInfo>> {
+    override fun getLocalPictureInfo(): Flow<List<PictureInfo>> {
         return appDao.getPictureInfo()
     }
 
-    override fun addFavoritePictureInfo(pictureInfo: PictureInfo) {
+    override fun insertPicturesInfo(pictureInfo: PictureInfo) {
         appDao.insertPictureInfo(pictureInfo)
     }
 }

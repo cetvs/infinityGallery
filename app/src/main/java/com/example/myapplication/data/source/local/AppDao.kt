@@ -13,4 +13,7 @@ interface AppDao {
 
     @Insert
     fun insertPictureInfo(pictureInfo: PictureInfo)
+
+    @Insert
+    fun updateFavoritePictureInfo(pictureInfo: PictureInfo)
 }

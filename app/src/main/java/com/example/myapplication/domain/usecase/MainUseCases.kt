@@ -2,6 +2,6 @@ package com.example.myapplication.domain.usecase
 
 class MainUseCases(
     val getPictureInfo: GetPictureInfo,
-    val addFavoritePictureInfo: AddFavoritePictureInfo,
-    val getFavoritePictureInfo: GetFavoritePictureInfo
+    val insertPicturesInfo: InsertPicturesInfo,
+    val getLocalPictureInfo: GetLocalPictureInfo
 )
