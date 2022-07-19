@@ -19,10 +19,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.myapplication.R
+import com.example.myapplication.presentation.main_app.main_screen.MainViewModel
 
 @ExperimentalFoundationApi
 @Composable
-fun SuccessMainScreen(navController: NavHostController) {
+fun SuccessMainScreen(navController: NavHostController, mainViewModel: MainViewModel) {
     val isSearchState = remember { mutableStateOf(false) }
     Column {
         Box(Modifier.height(50.dp)) {
@@ -50,6 +51,6 @@ fun SuccessMainScreen(navController: NavHostController) {
                 SearchCompose(isSearchState)
             }
         }
-        MainScreenContent(navController)
+        MainScreenContent(navController, mainViewModel)
     }
 }

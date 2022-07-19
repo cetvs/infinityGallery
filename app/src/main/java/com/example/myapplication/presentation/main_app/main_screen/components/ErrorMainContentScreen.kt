@@ -19,13 +19,14 @@ import com.example.myapplication.presentation.ui.theme.UpdateScreenGray
 
 @Preview
 @Composable
-fun ErrorMainContent() {
+fun ErrorMainContentScreen() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
 //            .background(Color.Green)
             .fillMaxSize()
     ) {
+        TopBarText(text = "Галерея")
         Column(
             modifier = Modifier
 //                .background(Color.Red)

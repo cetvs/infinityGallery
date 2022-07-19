@@ -13,46 +13,46 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.myapplication.R
 import com.example.myapplication.domain.model.PictureInfo
 import com.example.myapplication.presentation.main_app.main_screen.MainViewModel
-import com.example.myapplication.presentation.main_app.main_screen.PictureInfoListState
 import com.example.myapplication.presentation.main_app.models.NavItem
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @ExperimentalFoundationApi
 @Composable
 fun MainScreenContent(
     navController: NavHostController,
-    mainViewModel: MainViewModel = hiltViewModel()
+    mainViewModel: MainViewModel,
 ) {
-    val pictureInfoListState = mainViewModel.state.value
-    mainViewModel.getPictureInfo()
-    if (pictureInfoListState.error.isEmpty()) {
-        MainGrid(navController, pictureInfoListState)
-    } else {
-        ErrorMainContent()
-    }
+    MainGrid(navController, mainViewModel)
 }
 
 
 @ExperimentalFoundationApi
 @Composable
-fun MainGrid(navController: NavHostController, pictureInfoListState: PictureInfoListState) {
-    LazyVerticalGrid(
-        cells = GridCells.Fixed(2),
-        modifier = Modifier.padding(16.dp, 16.dp, 0.dp, 16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+fun MainGrid(navController: NavHostController, mainViewModel: MainViewModel) {
+    var picturesState = mainViewModel.state.value
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(false),
+        onRefresh = { mainViewModel.getPictureInfo() },
     ) {
-        items(
-            count = pictureInfoListState.value.size,
-            itemContent = {
-                MenuListItem(pictureInfoListState.value[it], it, navController)
-            }
-        )
+        LazyVerticalGrid(
+            cells = GridCells.Fixed(2),
+            modifier = Modifier.padding(16.dp, 16.dp, 0.dp, 16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            items(
+                count = picturesState.value.size,
+                itemContent = {
+                    MenuListItem(picturesState.value[it], it, navController)
+                }
+            )
+        }
     }
 }
 

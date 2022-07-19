@@ -47,12 +47,13 @@ class MainViewModel @Inject constructor(
         mainUseCases.getPictureInfo().onEach { result ->
             when (result) {
                 is Resource.Success ->
-                    if (result.data != null) _state.value =
-                        PictureInfoListState(value = result.data)
-                is Resource.Loading ->
-                    _state.value = PictureInfoListState(isLoading = true)
-                else -> if (result.data != null) _state.value =
-                    PictureInfoListState(value = result.data)
+                    _state.value = PictureInfoListState(value = result.data ?: emptyList())
+                is Resource.Error ->
+                    _state.value = PictureInfoListState(error = "internet error")
+//                is Resource.Loading ->
+//                    _state.value = PictureInfoListState(isLoading = true)
+//                else -> if (result.data != null) _state.value =
+//                    PictureInfoListState(value = result.data)
             }
         }.launchIn(viewModelScope)
     }
