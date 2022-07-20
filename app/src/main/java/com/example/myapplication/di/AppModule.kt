@@ -7,10 +7,7 @@ import com.example.myapplication.data.source.local.AppDatabase
 import com.example.myapplication.data.source.remote.Constants
 import com.example.myapplication.data.source.remote.SimpleApi
 import com.example.myapplication.domain.repository.MainRepository
-import com.example.myapplication.domain.usecase.GetLocalPictureInfo
-import com.example.myapplication.domain.usecase.GetPictureInfo
-import com.example.myapplication.domain.usecase.InsertPicturesInfo
-import com.example.myapplication.domain.usecase.MainUseCases
+import com.example.myapplication.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,7 +57,8 @@ object AppModule {
         return MainUseCases(
             getPictureInfo = GetPictureInfo(mainRepository),
             insertPicturesInfo = InsertPicturesInfo(mainRepository),
-            getLocalPictureInfo = GetLocalPictureInfo(mainRepository)
+            getLocalPictureInfo = GetLocalPictureInfo(mainRepository),
+            deleteAllMenuItems = DeleteAllMenuItems(mainRepository)
         )
     }
 }

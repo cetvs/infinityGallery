@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.myapplication.presentation.main_app.main_screen.MainViewModel
+import com.example.myapplication.presentation.main_app.main_screen.SuccessMainScreen
 import com.example.myapplication.presentation.main_app.main_screen.components.ErrorMainContentScreen
-import com.example.myapplication.presentation.main_app.main_screen.components.SuccessMainScreen
 
 @ExperimentalFoundationApi
 @Composable
@@ -16,6 +16,8 @@ fun MainScreen(
 ) {
     val pictureInfoListState = mainViewModel.state.value
     mainViewModel.getPictureInfo()
+
+//    SearchScreen(navController = navController)
 
     when {
         pictureInfoListState.error.isNotBlank() ->

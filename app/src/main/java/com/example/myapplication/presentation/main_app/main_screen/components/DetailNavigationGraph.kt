@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.main_screen.components.details
+package com.example.myapplication.presentation.main_app.main_screen.components
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController

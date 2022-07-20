@@ -7,7 +7,7 @@ import retrofit2.http.Headers
 interface SimpleApi {
     @Headers(
 //        "Content-Type: application/json",
-        "Authorization: Token b35d27a498f9b1cde23f5f37d2c78fd0057ab5f6cc97d9f322f55995561be910"
+        "Authorization: Token 305f5c9aaa6afe8af90b97733395e71ae3ac8ff3f3cb752cf993ef790e3ee3ad"
     )
     @GET("picture")
     suspend fun getPictureInfo(): List<PictureInfo>

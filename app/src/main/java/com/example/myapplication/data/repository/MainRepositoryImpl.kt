@@ -17,7 +17,12 @@ class MainRepositoryImpl(
         return appDao.getPictureInfo()
     }
 
-    override fun insertPicturesInfo(pictureInfo: PictureInfo) {
-        appDao.insertPictureInfo(pictureInfo)
+    override fun insertPicturesInfo(picturesInfo: List<PictureInfo>) {
+        appDao.insertPictureInfo(picturesInfo)
     }
+
+    override fun deleteAllMenuItems() {
+        appDao.deleteAllMenuItems()
+    }
+
 }

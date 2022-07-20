@@ -12,8 +12,11 @@ interface AppDao {
     fun getPictureInfo(): Flow<List<PictureInfo>>
 
     @Insert
-    fun insertPictureInfo(pictureInfo: PictureInfo)
+    fun insertPictureInfo(pictureInfo: List<PictureInfo>)
 
     @Insert
     fun updateFavoritePictureInfo(pictureInfo: PictureInfo)
+
+    @Query("DELETE FROM pictureInfo")
+    fun deleteAllMenuItems()
 }

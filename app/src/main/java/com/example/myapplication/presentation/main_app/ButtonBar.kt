@@ -15,8 +15,8 @@ import com.example.myapplication.domain.model.PictureInfo
 import com.example.myapplication.presentation.main_app.components.FavoriteScreen
 import com.example.myapplication.presentation.main_app.components.MainScreen
 import com.example.myapplication.presentation.main_app.components.ProfileScreen
+import com.example.myapplication.presentation.main_app.main_screen.MainInfoDetailsScreen
 import com.example.myapplication.presentation.main_app.main_screen.SearchScreen
-import com.example.myapplication.presentation.main_app.main_screen.components.details.MainInfoDetailsScreen
 import com.example.myapplication.presentation.main_app.models.NavItem
 
 @ExperimentalFoundationApi
@@ -64,7 +64,7 @@ fun BottomNavGraph(navController: NavHostController) {
         ) {
             navController.previousBackStackEntry?.arguments?.
             getParcelable<PictureInfo>("MENU_ITEM")?.let {
-                MainInfoDetailsScreen(it)
+                MainInfoDetailsScreen(navController, it)
             }
         }
         composable(

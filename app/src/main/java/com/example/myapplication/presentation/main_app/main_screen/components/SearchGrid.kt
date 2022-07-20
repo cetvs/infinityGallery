@@ -25,7 +25,8 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 @ExperimentalFoundationApi
 @Composable
 fun SearchGrid(navController: NavHostController, mainViewModel: MainViewModel) {
-    val picturesState = mainViewModel.state.value
+    val picturesLocalState = mainViewModel.localState
+    mainViewModel.getLocalPictureInfo()
     SwipeRefresh(
         state = rememberSwipeRefreshState(false),
         onRefresh = { mainViewModel.getPictureInfo() },
@@ -37,9 +38,9 @@ fun SearchGrid(navController: NavHostController, mainViewModel: MainViewModel) {
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(
-                count = picturesState.value.size,
+                count = picturesLocalState.value.size,
                 itemContent = {
-                    SearchGridListItem(picturesState.value[it], it, navController)
+                    SearchGridListItem(picturesLocalState.value[it], navController)
                 }
             )
         }
@@ -47,19 +48,17 @@ fun SearchGrid(navController: NavHostController, mainViewModel: MainViewModel) {
 }
 
 @Composable
-fun SearchGridListItem(menuItem: PictureInfo, index: Int, navController: NavHostController) {
+fun SearchGridListItem(menuItem: PictureInfo, navController: NavHostController) {
     Column(Modifier.clickable {
-        val arguments = navController.currentBackStackEntry?.arguments
-        arguments?.putParcelable("MENU_ITEM", menuItem)
         navController.navigate(NavItem.Details.route)
     }) {
-        SearchGridListImage(menuItem = menuItem, index = index)
+        SearchGridListImage(menuItem = menuItem)
         Text(text = menuItem.title)
     }
 }
 
 @Composable
-fun SearchGridListImage(menuItem: PictureInfo, index: Int) {
+fun SearchGridListImage(menuItem: PictureInfo) {
     val scale = 1.1
     Box {
         AsyncImage(

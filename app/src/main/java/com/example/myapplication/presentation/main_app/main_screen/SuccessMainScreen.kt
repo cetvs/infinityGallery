@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.main_screen.components
+package com.example.myapplication.presentation.main_app.main_screen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.myapplication.R
-import com.example.myapplication.presentation.main_app.main_screen.MainViewModel
+import com.example.myapplication.presentation.main_app.main_screen.components.MainGrid
 import com.example.myapplication.presentation.main_app.models.NavItem
 
 @ExperimentalFoundationApi

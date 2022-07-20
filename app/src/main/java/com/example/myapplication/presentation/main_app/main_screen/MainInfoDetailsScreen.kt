@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.main_screen.components.details
+package com.example.myapplication.presentation.main_app.main_screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.myapplication.R
 import com.example.myapplication.common.convertLongToTime
@@ -19,18 +20,19 @@ import com.example.myapplication.domain.model.PictureInfo
 
 @Composable
 fun MainInfoDetailsScreen(
+    navController: NavHostController,
     pictureInfo: PictureInfo
 ) {
     Column() {
-        TopBar()
-        PictureInfoDetails(pictureInfo)
+        TopBar(navController)
+        PictureInfoDetails(navController, pictureInfo)
     }
 }
 
 @Composable
-fun TopBar() {
+fun TopBar(navController: NavHostController) {
     Row() {
-        IconButton(onClick = { /*TODO*/ }) {
+        IconButton(onClick = { navController.popBackStack() }) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_back),
                 contentDescription = null
@@ -44,7 +46,7 @@ fun TopBar() {
 }
 
 @Composable
-fun PictureInfoDetails(pictureInfo: PictureInfo) {
+fun PictureInfoDetails(navController: NavHostController, pictureInfo: PictureInfo) {
     Column() {
         AsyncImage(
             model = pictureInfo.photoUrl,

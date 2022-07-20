@@ -6,7 +6,7 @@ import com.example.myapplication.domain.repository.MainRepository
 class InsertPicturesInfo(
     private val repository: MainRepository
 ) {
-    operator fun invoke(pictureInfo: PictureInfo) {
-        repository.insertPicturesInfo(pictureInfo)
+    operator fun invoke(picturesInfo: List<PictureInfo>) {
+        repository.insertPicturesInfo(picturesInfo)
     }
 }
