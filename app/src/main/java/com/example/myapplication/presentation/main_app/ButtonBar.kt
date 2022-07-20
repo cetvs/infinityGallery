@@ -60,7 +60,6 @@ fun BottomNavGraph(navController: NavHostController) {
         }
         composable(
             route = NavItem.Details.route
-//            arguments = listOf(navArgument("PROFILE_INFO"){type = NavType.ParcelableType()})
         ) {
             navController.previousBackStackEntry?.arguments?.
             getParcelable<PictureInfo>("MENU_ITEM")?.let {

@@ -25,7 +25,7 @@ fun MainInfoDetailsScreen(
 ) {
     Column() {
         TopBar(navController)
-        PictureInfoDetails(navController, pictureInfo)
+        PictureInfoDetails(pictureInfo)
     }
 }
 
@@ -46,7 +46,7 @@ fun TopBar(navController: NavHostController) {
 }
 
 @Composable
-fun PictureInfoDetails(navController: NavHostController, pictureInfo: PictureInfo) {
+fun PictureInfoDetails(pictureInfo: PictureInfo) {
     Column() {
         AsyncImage(
             model = pictureInfo.photoUrl,

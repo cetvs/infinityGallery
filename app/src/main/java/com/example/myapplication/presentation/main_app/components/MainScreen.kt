@@ -32,11 +32,14 @@ fun MainCall(
 //    SearchScreen(navController = navController)
 
     when {
-        pictureInfoListState.error.isNotBlank() ->
+        pictureInfoListState.error.isNotBlank() -> {
             ErrorMainContentScreen(navController, mainViewModel)
-        pictureInfoListState.value.isNotEmpty() ->
+        }
+        pictureInfoListState.value.isNotEmpty() -> {
             SuccessMainScreen(navController, mainViewModel)
-        pictureInfoListState.isLoading ->
+        }
+        pictureInfoListState.isLoading -> {
             LoadingScreen()
+        }
     }
 }
