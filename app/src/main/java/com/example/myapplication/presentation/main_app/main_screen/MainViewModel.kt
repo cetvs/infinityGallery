@@ -34,7 +34,7 @@ class MainViewModel @Inject constructor(
                     viewModelScope.launch(Dispatchers.IO) {
                         mainUseCases.deleteAllMenuItems()
                         result.data?.let {
-                            for(el in it)
+                            for (el in it)
                                 Log.v("testSearch", el.id.toString())
 //                            mainUseCases.insertPicturesInfo(it)
                         }
@@ -42,10 +42,8 @@ class MainViewModel @Inject constructor(
                 }
                 is Resource.Error ->
                     _state.value = PictureInfoListState(error = "internet error")
-//                is Resource.Loading ->
-//                    _state.value = PictureInfoListState(isLoading = true)
-//                else -> if (result.data != null) _state.value =
-//                    PictureInfoListState(value = result.data)
+                is Resource.Loading ->
+                    _state.value = PictureInfoListState(isLoading = true)
             }
         }.launchIn(viewModelScope)
     }

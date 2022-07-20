@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.main_screen.components
+package com.example.myapplication.presentation.main_app.main_screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -12,24 +12,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.myapplication.R
+import com.example.myapplication.presentation.main_app.main_screen.components.TopBarText
 import com.example.myapplication.presentation.ui.theme.UpdateScreenGray
 
-@Preview
 @Composable
-fun ErrorMainContentScreen() {
+fun ErrorMainContentScreen(navController: NavHostController, mainViewModel: MainViewModel) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-//            .background(Color.Green)
             .fillMaxSize()
     ) {
         TopBarText(text = "Галерея")
         Column(
             modifier = Modifier
-//                .background(Color.Red)
                 .fillMaxHeight(0.8f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -48,7 +46,7 @@ fun ErrorMainContentScreen() {
             )
         }
         Button(
-            onClick = { /*TODO*/ }, Modifier.size(380.dp, 48.dp),
+            onClick = { mainViewModel.getPictureInfo() }, Modifier.size(380.dp, 48.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
         ) {
             Text(
