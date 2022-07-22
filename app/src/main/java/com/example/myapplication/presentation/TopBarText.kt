@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.main_screen.components
+package com.example.myapplication.presentation
 
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar

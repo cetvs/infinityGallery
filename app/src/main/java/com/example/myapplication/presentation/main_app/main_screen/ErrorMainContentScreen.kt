@@ -15,20 +15,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.myapplication.R
-import com.example.myapplication.presentation.main_app.main_screen.components.TopBarText
+import com.example.myapplication.presentation.TopBarText
 import com.example.myapplication.presentation.ui.theme.UpdateScreenGray
 
 @Composable
 fun ErrorMainContentScreen(navController: NavHostController, mainViewModel: MainViewModel) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         TopBarText(text = "Галерея")
         Column(
-            modifier = Modifier
-                .fillMaxHeight(0.8f),
+            modifier = Modifier.fillMaxHeight(0.8f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
