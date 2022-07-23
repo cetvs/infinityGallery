@@ -16,8 +16,8 @@ class MainRepositoryImpl(
         return simpleApi.getProfileInfo(profileRequestBody)
     }
 
-    override suspend fun getPictureInfo(): List<PictureInfo> =
-        simpleApi.getPictureInfo()
+    override suspend fun getPictureInfo(token: String): List<PictureInfo> =
+        simpleApi.getPictureInfo("Token $token")
 
     override fun getLocalPictureInfo(): Flow<List<PictureInfo>> =
         appDao.getPictureInfo()

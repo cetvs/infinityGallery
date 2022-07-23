@@ -14,17 +14,19 @@ import com.example.myapplication.presentation.main_app.main_screen.components.Lo
 @Composable
 fun MainScreen(
     navController: NavHostController,
+    token: String,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
-    mainViewModel.getPictureInfo()
+    mainViewModel.getPictureInfo(token)
     Log.v("MainScreen", "1")
-    MainCall(navController, mainViewModel)
+    MainCall(navController, token, mainViewModel)
 }
 
 @ExperimentalFoundationApi
 @Composable
 fun MainCall(
     navController: NavHostController,
+    token: String,
     mainViewModel: MainViewModel
 ) {
     val pictureInfoListState = mainViewModel.state.value
@@ -32,10 +34,10 @@ fun MainCall(
 //    SearchScreen(navController = navController)
     when {
         pictureInfoListState.error.isNotBlank() -> {
-            ErrorMainContentScreen(navController, mainViewModel)
+            ErrorMainContentScreen(navController, token, mainViewModel)
         }
         pictureInfoListState.value.isNotEmpty() -> {
-            SuccessMainScreen(navController, mainViewModel)
+            SuccessMainScreen(navController, token, mainViewModel)
         }
         pictureInfoListState.isLoading -> {
             LoadingScreen()

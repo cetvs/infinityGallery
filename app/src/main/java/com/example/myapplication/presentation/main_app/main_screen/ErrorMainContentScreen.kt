@@ -20,7 +20,11 @@ import com.example.myapplication.presentation.main_app.components.TopBarText
 import com.example.myapplication.presentation.ui.theme.UpdateScreenGray
 
 @Composable
-fun ErrorMainContentScreen(navController: NavHostController, mainViewModel: MainViewModel) {
+fun ErrorMainContentScreen(
+    navController: NavHostController,
+    token: String,
+    mainViewModel: MainViewModel
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
@@ -45,7 +49,7 @@ fun ErrorMainContentScreen(navController: NavHostController, mainViewModel: Main
             )
         }
         Button(
-            onClick = { mainViewModel.getPictureInfo() }, Modifier.size(380.dp, 48.dp),
+            onClick = { mainViewModel.getPictureInfo(token) }, Modifier.size(380.dp, 48.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
         ) {
             Text(

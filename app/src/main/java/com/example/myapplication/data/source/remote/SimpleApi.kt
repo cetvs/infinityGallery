@@ -5,15 +5,15 @@ import com.example.myapplication.domain.model.ProfileInfo
 import com.example.myapplication.domain.model.ProfileRequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Headers
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface SimpleApi {
-    @Headers(
-        "Authorization: Token 305f5c9aaa6afe8af90b97733395e71ae3ac8ff3f3cb752cf993ef790e3ee3ad"
-    )
+//    @Headers(
+//        "Authorization: Token 305f5c9aaa6afe8af90b97733395e71ae3ac8ff3f3cb752cf993ef790e3ee3ad"
+//    )
     @GET("picture")
-    suspend fun getPictureInfo(): List<PictureInfo>
+    suspend fun getPictureInfo(@Header("Authorization") token: String): List<PictureInfo>
 
     @POST("auth/login")
     suspend fun getProfileInfo(@Body requestBody: ProfileRequestBody): ProfileInfo

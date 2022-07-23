@@ -51,7 +51,7 @@ fun BottomNavGraph(navController: NavHostController, profileInfo: ProfileInfo) {
         startDestination = NavItem.Main.route
     ) {
         composable(route = NavItem.Main.route) {
-            MainScreen(navController)
+            MainScreen(navController, profileInfo.token)
         }
         composable(route = NavItem.Favorite.route) {
             FavoriteScreen()
@@ -70,7 +70,7 @@ fun BottomNavGraph(navController: NavHostController, profileInfo: ProfileInfo) {
         composable(
             route = NavItem.Search.route
         ) {
-            SearchScreen(navController = navController)
+            SearchScreen(navController, profileInfo.token)
         }
     }
 }

@@ -24,12 +24,12 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @ExperimentalFoundationApi
 @Composable
-fun SearchGrid(navController: NavHostController, mainViewModel: MainViewModel) {
+fun SearchGrid(navController: NavHostController, token: String, mainViewModel: MainViewModel) {
     val picturesLocalState = mainViewModel.localState
     mainViewModel.getLocalPictureInfo()
     SwipeRefresh(
         state = rememberSwipeRefreshState(false),
-        onRefresh = { mainViewModel.getPictureInfo() },
+        onRefresh = { mainViewModel.getPictureInfo(token) },
     ) {
         LazyVerticalGrid(
             cells = GridCells.Fixed(2),

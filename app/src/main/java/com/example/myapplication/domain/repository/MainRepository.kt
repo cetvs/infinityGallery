@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {
     suspend fun getProfileInfo(profileRequestBody: ProfileRequestBody): ProfileInfo
-    suspend fun getPictureInfo(): List<PictureInfo>
+    suspend fun getPictureInfo(token: String): List<PictureInfo>
     fun getLocalPictureInfo(): Flow<List<PictureInfo>>
     fun insertPicturesInfo(picturesInfo: List<PictureInfo>)
     fun deleteAllMenuItems()

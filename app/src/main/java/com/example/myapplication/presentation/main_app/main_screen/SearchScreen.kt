@@ -13,10 +13,12 @@ import com.example.myapplication.presentation.main_app.main_screen.components.Se
 @Composable
 fun SearchScreen(
     navController: NavHostController,
+    token: String,
     mainViewModel: MainViewModel = hiltViewModel(),
 ) {
     Column {
         SearchBar(navController)
-        SearchGrid(navController, mainViewModel)
+        SearchGrid(navController, token, mainViewModel)
+
     }
 }

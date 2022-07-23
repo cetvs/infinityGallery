@@ -11,11 +11,11 @@ import java.io.IOException
 class GetPictureInfo(
     private val repository: MainRepository
 ) {
-    operator fun invoke(): Flow<Resource<List<PictureInfo>>> =
+    operator fun invoke(token: String): Flow<Resource<List<PictureInfo>>> =
         flow {
             try {
                 emit(Resource.Loading())
-                val picturesList = repository.getPictureInfo()
+                val picturesList = repository.getPictureInfo(token)
                 emit(Resource.Success(picturesList))
             } catch (e: HttpException) {
                 emit(Resource.Error(e.localizedMessage ?: "An unexpected error occured"))

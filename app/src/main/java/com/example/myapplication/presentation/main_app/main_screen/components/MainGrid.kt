@@ -28,17 +28,17 @@ fun MainScreenContent(
     navController: NavHostController,
     mainViewModel: MainViewModel,
 ) {
-    MainGrid(navController, mainViewModel)
+//    MainGrid(navController, token, mainViewModel)
 }
 
 
 @ExperimentalFoundationApi
 @Composable
-fun MainGrid(navController: NavHostController, mainViewModel: MainViewModel) {
+fun MainGrid(navController: NavHostController, token: String, mainViewModel: MainViewModel) {
     val picturesState = mainViewModel.state.value
     SwipeRefresh(
         state = rememberSwipeRefreshState(false),
-        onRefresh = { mainViewModel.getPictureInfo() },
+        onRefresh = { mainViewModel.getPictureInfo(token) },
     ) {
         LazyVerticalGrid(
             cells = GridCells.Fixed(2),

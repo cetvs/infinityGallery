@@ -23,7 +23,7 @@ import com.example.myapplication.presentation.main_app.models.NavItem
 
 @ExperimentalFoundationApi
 @Composable
-fun SuccessMainScreen(navController: NavHostController, mainViewModel: MainViewModel) {
+fun SuccessMainScreen(navController: NavHostController, token: String, mainViewModel: MainViewModel) {
     Column {
         Box(Modifier.height(50.dp)) {
             TopAppBar(
@@ -47,6 +47,6 @@ fun SuccessMainScreen(navController: NavHostController, mainViewModel: MainViewM
             )
         }
 //        MainScreenContent(navController, mainViewModel)
-        MainGrid(navController, mainViewModel)
+        MainGrid(navController, token, mainViewModel)
     }
 }

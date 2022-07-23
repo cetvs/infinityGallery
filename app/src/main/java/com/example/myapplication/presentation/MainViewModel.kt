@@ -30,8 +30,8 @@ class MainViewModel @Inject constructor(
     private val _localState = mutableStateOf(listOf<PictureInfo>())
     val localState: State<List<PictureInfo>> = _localState
 
-    fun getPictureInfo() {
-        mainUseCases.getPictureInfo().onEach { result ->
+    fun getPictureInfo(token: String) {
+        mainUseCases.getPictureInfo(token).onEach { result ->
             when (result) {
                 is Resource.Success -> {
                     _state.value = PictureInfoListState(value = result.data ?: emptyList())
