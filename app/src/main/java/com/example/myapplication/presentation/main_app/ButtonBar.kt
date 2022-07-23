@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.domain.model.PictureInfo
+import com.example.myapplication.domain.model.ProfileInfo
 import com.example.myapplication.presentation.main_app.components.FavoriteScreen
 import com.example.myapplication.presentation.main_app.components.MainScreen
 import com.example.myapplication.presentation.main_app.components.ProfileScreen
@@ -21,7 +22,7 @@ import com.example.myapplication.presentation.main_app.models.NavItem
 
 @ExperimentalFoundationApi
 @Composable
-fun ButtonBar() {
+fun ButtonBar(profileInfo: ProfileInfo) {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
@@ -38,13 +39,13 @@ fun ButtonBar() {
             )
         }
     ) {
-        BottomNavGraph(navController)
+        BottomNavGraph(navController, profileInfo)
     }
 }
 
 @ExperimentalFoundationApi
 @Composable
-fun BottomNavGraph(navController: NavHostController) {
+fun BottomNavGraph(navController: NavHostController, profileInfo: ProfileInfo) {
     NavHost(
         navController = navController,
         startDestination = NavItem.Main.route
@@ -56,7 +57,7 @@ fun BottomNavGraph(navController: NavHostController) {
             FavoriteScreen()
         }
         composable(route = NavItem.Profile.route) {
-            ProfileScreen()
+            ProfileScreen(profileInfo)
         }
         composable(
             route = NavItem.Details.route

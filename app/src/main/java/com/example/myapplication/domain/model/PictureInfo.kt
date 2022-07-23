@@ -3,21 +3,20 @@ package com.example.myapplication.domain.model
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity(tableName = "pictureInfo")
 data class PictureInfo(
     @PrimaryKey
-    @SerializedName("id")
+//    @SerializedName("id")
     val id: String,
-    @SerializedName("title")
+//    @SerializedName("title")
     val title: String,
-    @SerializedName("content")
+//    @SerializedName("content")
     val content: String,
-    @SerializedName("photoUrl")
+//    @SerializedName("photoUrl")
     val photoUrl: String,
-    @SerializedName("publicationDate")
+//    @SerializedName("publicationDate")
     val publicationDate: Long,
 ) : Parcelable

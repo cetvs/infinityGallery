@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.myapplication.R
-import com.example.myapplication.presentation.TopBarText
+import com.example.myapplication.presentation.main_app.components.TopBarText
 
 @Preview
 @Composable

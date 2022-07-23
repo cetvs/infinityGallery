@@ -27,7 +27,7 @@ object AppModule {
             app.applicationContext,
             AppDatabase::class.java,
             AppDatabase.DATABASE_NAME
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Provides
@@ -55,10 +55,14 @@ object AppModule {
     @Singleton
     fun provideMenuUseCases(mainRepository: MainRepository): MainUseCases {
         return MainUseCases(
+            getProfileInfo = GetProfileInfo(mainRepository),
             getPictureInfo = GetPictureInfo(mainRepository),
-            insertPicturesInfo = InsertPicturesInfo(mainRepository),
+            getLocalProfileInfo = GetLocalProfileInfo(mainRepository),
             getLocalPictureInfo = GetLocalPictureInfo(mainRepository),
-            deleteAllMenuItems = DeleteAllMenuItems(mainRepository)
+            insertProfileInfo = InsertProfileInfo(mainRepository),
+            insertPicturesInfo = InsertPicturesInfo(mainRepository),
+            deleteProfileInfo = DeleteProfileInfo(mainRepository),
+            deleteAllMenuItems = DeleteAllMenuItems(mainRepository),
         )
     }
 }
