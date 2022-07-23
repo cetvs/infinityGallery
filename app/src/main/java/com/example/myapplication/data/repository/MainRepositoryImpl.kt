@@ -19,6 +19,10 @@ class MainRepositoryImpl(
     override suspend fun getPictureInfo(token: String): List<PictureInfo> =
         simpleApi.getPictureInfo("Token $token")
 
+    override suspend fun postAuthLogout(token: String) {
+        simpleApi.postAuthLogout("Token $token")
+    }
+
     override fun getLocalPictureInfo(): Flow<List<PictureInfo>> =
         appDao.getPictureInfo()
 

@@ -17,4 +17,7 @@ interface SimpleApi {
 
     @POST("auth/login")
     suspend fun getProfileInfo(@Body requestBody: ProfileRequestBody): ProfileInfo
+
+    @POST("auth/logout")
+    suspend fun postAuthLogout(@Header("Authorization") token: String)
 }

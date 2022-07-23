@@ -57,6 +57,7 @@ object AppModule {
         return MainUseCases(
             getProfileInfo = GetProfileInfo(mainRepository),
             getPictureInfo = GetPictureInfo(mainRepository),
+            postAuthLogout = PostAuthLogout(mainRepository),
             getLocalProfileInfo = GetLocalProfileInfo(mainRepository),
             getLocalPictureInfo = GetLocalPictureInfo(mainRepository),
             insertProfileInfo = InsertProfileInfo(mainRepository),

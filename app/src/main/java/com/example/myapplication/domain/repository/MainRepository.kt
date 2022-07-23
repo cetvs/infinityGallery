@@ -14,4 +14,5 @@ interface MainRepository {
     fun insertProfileInfo(profileInfo: ProfileInfo)
     fun deleteProfileInfo()
     fun getLocalProfileInfo(): ProfileInfo?
+    suspend fun postAuthLogout(token: String)
 }
