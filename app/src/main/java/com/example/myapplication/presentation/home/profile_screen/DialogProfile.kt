@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.profile_screen
+package com.example.myapplication.presentation.home.profile_screen
 
 import android.app.Activity
 import android.content.Intent

@@ -11,7 +11,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import com.example.myapplication.presentation.main_app.main_screen.HomeScreen
+import com.example.myapplication.presentation.home.main_screen.HomeScreen
 import com.example.myapplication.presentation.ui.theme.MyApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
 

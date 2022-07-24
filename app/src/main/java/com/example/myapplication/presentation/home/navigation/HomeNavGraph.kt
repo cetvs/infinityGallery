@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.navigation
+package com.example.myapplication.presentation.home.navigation
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
@@ -8,12 +8,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.myapplication.domain.model.PictureInfo
 import com.example.myapplication.domain.model.ProfileInfo
-import com.example.myapplication.presentation.main_app.components.FavoriteScreen
-import com.example.myapplication.presentation.main_app.components.MainScreen
-import com.example.myapplication.presentation.main_app.components.ProfileScreen
-import com.example.myapplication.presentation.main_app.main_screen.MainInfoDetailsScreen
-import com.example.myapplication.presentation.main_app.main_screen.SearchScreen
-import com.example.myapplication.presentation.main_app.models.NavItem
+import com.example.myapplication.presentation.home.components.FavoriteScreen
+import com.example.myapplication.presentation.home.components.MainScreen
+import com.example.myapplication.presentation.home.components.ProfileScreen
+import com.example.myapplication.presentation.home.main_screen.MainInfoDetailsScreen
+import com.example.myapplication.presentation.home.main_screen.SearchScreen
+import com.example.myapplication.presentation.home.models.NavItem
 
 @ExperimentalComposeUiApi
 @ExperimentalFoundationApi

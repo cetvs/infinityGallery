@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.main_screen.components
+package com.example.myapplication.presentation.home.main_screen.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
@@ -19,7 +19,7 @@ import coil.compose.AsyncImage
 import com.example.myapplication.R
 import com.example.myapplication.domain.model.PictureInfo
 import com.example.myapplication.presentation.MainViewModel
-import com.example.myapplication.presentation.main_app.models.NavItem
+import com.example.myapplication.presentation.home.models.NavItem
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 

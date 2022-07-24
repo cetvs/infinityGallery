@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.main_screen.components
+package com.example.myapplication.presentation.home.main_screen.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.myapplication.R
-import com.example.myapplication.presentation.main_app.components.TopBarText
+import com.example.myapplication.presentation.home.components.TopBarText
 
 @Preview
 @Composable

@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.main_screen
+package com.example.myapplication.presentation.home.main_screen
 
 import com.example.myapplication.domain.model.PictureInfo
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.main_screen
+package com.example.myapplication.presentation.home.main_screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -14,10 +14,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.myapplication.R
 import com.example.myapplication.presentation.MainViewModel
-import com.example.myapplication.presentation.main_app.components.TopBarText
+import com.example.myapplication.presentation.home.components.TopBarText
 import com.example.myapplication.presentation.ui.theme.UpdateScreenGray
 
 @Composable

@@ -10,7 +10,7 @@ import com.example.myapplication.domain.model.PictureInfo
 import com.example.myapplication.domain.model.ProfileInfo
 import com.example.myapplication.domain.model.ProfileRequestBody
 import com.example.myapplication.domain.usecase.MainUseCases
-import com.example.myapplication.presentation.main_app.main_screen.PictureInfoListState
+import com.example.myapplication.presentation.home.main_screen.PictureInfoListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn

@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.main_screen.components
+package com.example.myapplication.presentation.home.main_screen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.myapplication.R
 import com.example.myapplication.presentation.ui.theme.HintGray
 import com.example.myapplication.presentation.ui.theme.SearchLightGray

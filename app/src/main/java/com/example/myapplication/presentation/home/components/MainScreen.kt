@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.components
+package com.example.myapplication.presentation.home.components
 
 import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -7,9 +7,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.myapplication.presentation.MainViewModel
-import com.example.myapplication.presentation.main_app.main_screen.ErrorMainContentScreen
-import com.example.myapplication.presentation.main_app.main_screen.SuccessMainScreen
-import com.example.myapplication.presentation.main_app.main_screen.components.LoadingScreen
+import com.example.myapplication.presentation.home.main_screen.ErrorMainContentScreen
+import com.example.myapplication.presentation.home.main_screen.SuccessMainScreen
+import com.example.myapplication.presentation.home.main_screen.components.LoadingScreen
 
 @ExperimentalFoundationApi
 @Composable

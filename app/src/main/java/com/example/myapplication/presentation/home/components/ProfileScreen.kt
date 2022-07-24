@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.components
+package com.example.myapplication.presentation.home.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
@@ -18,7 +18,7 @@ import coil.compose.AsyncImage
 import com.example.myapplication.domain.model.ProfileInfo
 import com.example.myapplication.domain.model.UserInfo
 import com.example.myapplication.presentation.MainViewModel
-import com.example.myapplication.presentation.main_app.profile_screen.DialogProfile
+import com.example.myapplication.presentation.home.profile_screen.DialogProfile
 
 @ExperimentalComposeUiApi
 @ExperimentalFoundationApi

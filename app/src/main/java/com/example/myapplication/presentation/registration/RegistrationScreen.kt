@@ -26,7 +26,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myapplication.R
 import com.example.myapplication.domain.model.ProfileRequestBody
 import com.example.myapplication.presentation.MainActivity
-import com.example.myapplication.presentation.main_app.components.TopBarText
+import com.example.myapplication.presentation.home.components.TopBarText
 import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.ui.theme.Purple
 

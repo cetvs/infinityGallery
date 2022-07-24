@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app
+package com.example.myapplication.presentation.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.*
@@ -11,8 +11,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.domain.model.ProfileInfo
-import com.example.myapplication.presentation.main_app.models.NavItem
-import com.example.myapplication.presentation.main_app.navigation.HomeNavGraph
+import com.example.myapplication.presentation.home.models.NavItem
+import com.example.myapplication.presentation.home.navigation.HomeNavGraph
 
 @ExperimentalComposeUiApi
 @ExperimentalFoundationApi

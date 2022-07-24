@@ -1,4 +1,4 @@
-package com.example.myapplication.presentation.main_app.main_screen
+package com.example.myapplication.presentation.home.main_screen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.myapplication.presentation.MainViewModel
-import com.example.myapplication.presentation.main_app.main_screen.components.SearchBar
-import com.example.myapplication.presentation.main_app.main_screen.components.SearchGrid
+import com.example.myapplication.presentation.home.main_screen.components.SearchBar
+import com.example.myapplication.presentation.home.main_screen.components.SearchGrid
 
 @ExperimentalFoundationApi
 @Composable
