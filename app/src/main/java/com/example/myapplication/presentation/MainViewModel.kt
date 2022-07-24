@@ -58,11 +58,11 @@ class MainViewModel @Inject constructor(
             if (requestResult.message != "") requestResult.data else null
         }
 
-    fun postAuthLogout(token: String) {
+    fun postAuthLogout(token: String): Boolean =
         runBlocking {
             mainUseCases.postAuthLogout(token)
         }
-    }
+
 
     fun getLocalPictureInfo() {
         mainUseCases.getLocalPictureInfo().onEach { result ->

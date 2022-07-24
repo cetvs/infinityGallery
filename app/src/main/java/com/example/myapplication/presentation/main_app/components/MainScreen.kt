@@ -3,8 +3,9 @@ package com.example.myapplication.presentation.main_app.components
 import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.main_app.main_screen.ErrorMainContentScreen
 import com.example.myapplication.presentation.main_app.main_screen.SuccessMainScreen
@@ -13,19 +14,20 @@ import com.example.myapplication.presentation.main_app.main_screen.components.Lo
 @ExperimentalFoundationApi
 @Composable
 fun MainScreen(
-    navController: NavHostController,
+    navController: NavController,
     token: String,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
-    mainViewModel.getPictureInfo(token)
-    Log.v("MainScreen", "1")
+    LaunchedEffect(key1 = token) {
+        mainViewModel.getPictureInfo(token)
+    }
     MainCall(navController, token, mainViewModel)
 }
 
 @ExperimentalFoundationApi
 @Composable
 fun MainCall(
-    navController: NavHostController,
+    navController: NavController,
     token: String,
     mainViewModel: MainViewModel
 ) {

@@ -3,6 +3,7 @@ package com.example.myapplication.presentation.main_app
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -11,15 +12,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.domain.model.PictureInfo
 import com.example.myapplication.domain.model.ProfileInfo
 import com.example.myapplication.presentation.main_app.components.FavoriteScreen
 import com.example.myapplication.presentation.main_app.components.MainScreen
 import com.example.myapplication.presentation.main_app.components.ProfileScreen
-import com.example.myapplication.presentation.main_app.main_screen.MainInfoDetailsScreen
-import com.example.myapplication.presentation.main_app.main_screen.SearchScreen
 import com.example.myapplication.presentation.main_app.models.NavItem
 
+@ExperimentalComposeUiApi
 @ExperimentalFoundationApi
 @Composable
 fun ButtonBar(profileInfo: ProfileInfo) {
@@ -43,6 +42,7 @@ fun ButtonBar(profileInfo: ProfileInfo) {
     }
 }
 
+@ExperimentalComposeUiApi
 @ExperimentalFoundationApi
 @Composable
 fun BottomNavGraph(navController: NavHostController, profileInfo: ProfileInfo) {
@@ -59,19 +59,19 @@ fun BottomNavGraph(navController: NavHostController, profileInfo: ProfileInfo) {
         composable(route = NavItem.Profile.route) {
             ProfileScreen(profileInfo)
         }
-        composable(
-            route = NavItem.Details.route
-        ) {
-            navController.previousBackStackEntry?.arguments?.
-            getParcelable<PictureInfo>("MENU_ITEM")?.let {
-                MainInfoDetailsScreen(navController, it)
-            }
-        }
-        composable(
-            route = NavItem.Search.route
-        ) {
-            SearchScreen(navController, profileInfo.token)
-        }
+//        composable(
+//            route = NavItem.Details.route
+//        ) {
+//            navController.previousBackStackEntry?.arguments?.
+//            getParcelable<PictureInfo>("MENU_ITEM")?.let {
+//                MainInfoDetailsScreen(navController, it)
+//            }
+//        }
+//        composable(
+//            route = NavItem.Search.route
+//        ) {
+//            SearchScreen(navController, profileInfo.token)
+//        }
     }
 }
 

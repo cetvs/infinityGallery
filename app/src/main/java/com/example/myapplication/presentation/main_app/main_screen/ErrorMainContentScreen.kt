@@ -13,6 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.myapplication.R
 import com.example.myapplication.presentation.MainViewModel
@@ -21,7 +22,7 @@ import com.example.myapplication.presentation.ui.theme.UpdateScreenGray
 
 @Composable
 fun ErrorMainContentScreen(
-    navController: NavHostController,
+    navController: NavController,
     token: String,
     mainViewModel: MainViewModel
 ) {

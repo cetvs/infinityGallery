@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.myapplication.R
 import com.example.myapplication.presentation.MainViewModel
@@ -23,7 +24,7 @@ import com.example.myapplication.presentation.main_app.models.NavItem
 
 @ExperimentalFoundationApi
 @Composable
-fun SuccessMainScreen(navController: NavHostController, token: String, mainViewModel: MainViewModel) {
+fun SuccessMainScreen(navController: NavController, token: String, mainViewModel: MainViewModel) {
     Column {
         Box(Modifier.height(50.dp)) {
             TopAppBar(

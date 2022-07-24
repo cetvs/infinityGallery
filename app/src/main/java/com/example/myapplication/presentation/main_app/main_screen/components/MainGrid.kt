@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.myapplication.R
@@ -57,7 +58,7 @@ fun MainGrid(navController: NavHostController, token: String, mainViewModel: Mai
 }
 
 @Composable
-fun MainGridListItem(menuItem: PictureInfo, index: Int, navController: NavHostController) {
+fun MainGridListItem(menuItem: PictureInfo, index: Int, navController: NavController) {
     Column(Modifier.clickable {
         val arguments = navController.currentBackStackEntry?.arguments
         arguments?.putParcelable("MENU_ITEM", menuItem)
