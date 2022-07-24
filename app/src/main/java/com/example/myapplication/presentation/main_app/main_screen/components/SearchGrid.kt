@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.myapplication.R
 import com.example.myapplication.domain.model.PictureInfo
@@ -24,7 +24,7 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @ExperimentalFoundationApi
 @Composable
-fun SearchGrid(navController: NavHostController, token: String, mainViewModel: MainViewModel) {
+fun SearchGrid(navController: NavController, token: String, mainViewModel: MainViewModel) {
     val picturesLocalState = mainViewModel.localState
     mainViewModel.getLocalPictureInfo()
     SwipeRefresh(
@@ -48,7 +48,7 @@ fun SearchGrid(navController: NavHostController, token: String, mainViewModel: M
 }
 
 @Composable
-fun SearchGridListItem(menuItem: PictureInfo, navController: NavHostController) {
+fun SearchGridListItem(menuItem: PictureInfo, navController: NavController) {
     Column(Modifier.clickable {
         navController.navigate(NavItem.Details.route)
     }) {

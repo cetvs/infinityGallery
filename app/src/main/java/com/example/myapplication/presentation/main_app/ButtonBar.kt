@@ -8,15 +8,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.domain.model.ProfileInfo
-import com.example.myapplication.presentation.main_app.components.FavoriteScreen
-import com.example.myapplication.presentation.main_app.components.MainScreen
-import com.example.myapplication.presentation.main_app.components.ProfileScreen
 import com.example.myapplication.presentation.main_app.models.NavItem
+import com.example.myapplication.presentation.main_app.navigation.HomeNavGraph
 
 @ExperimentalComposeUiApi
 @ExperimentalFoundationApi
@@ -38,40 +34,7 @@ fun ButtonBar(profileInfo: ProfileInfo) {
             )
         }
     ) {
-        BottomNavGraph(navController, profileInfo)
-    }
-}
-
-@ExperimentalComposeUiApi
-@ExperimentalFoundationApi
-@Composable
-fun BottomNavGraph(navController: NavHostController, profileInfo: ProfileInfo) {
-    NavHost(
-        navController = navController,
-        startDestination = NavItem.Main.route
-    ) {
-        composable(route = NavItem.Main.route) {
-            MainScreen(navController, profileInfo.token)
-        }
-        composable(route = NavItem.Favorite.route) {
-            FavoriteScreen()
-        }
-        composable(route = NavItem.Profile.route) {
-            ProfileScreen(profileInfo)
-        }
-//        composable(
-//            route = NavItem.Details.route
-//        ) {
-//            navController.previousBackStackEntry?.arguments?.
-//            getParcelable<PictureInfo>("MENU_ITEM")?.let {
-//                MainInfoDetailsScreen(navController, it)
-//            }
-//        }
-//        composable(
-//            route = NavItem.Search.route
-//        ) {
-//            SearchScreen(navController, profileInfo.token)
-//        }
+        HomeNavGraph(navController, profileInfo)
     }
 }
 
@@ -82,20 +45,36 @@ fun BottomNavigationBar(
     onItemClick: (NavItem) -> Unit
 ) {
     val backStackEntry = navController.currentBackStackEntryAsState()
-    BottomNavigation(
-        elevation = 5.dp,
-        backgroundColor = Color.White
-    ) {
-        items.forEach { item ->
-            val selected = item.route == backStackEntry.value?.destination?.route
-            BottomNavigationItem(
-                selected = selected,
-                onClick = { onItemClick(item) },
-                icon = { Icon(painterResource(id = item.icon!!), contentDescription = item.name) },
-                label = { Text(text = item.name) },
-                selectedContentColor = Color.Black,
-                unselectedContentColor = Color.Gray,
-            )
+    val currentDestination = backStackEntry.value?.destination
+
+    val screens = listOf(
+        NavItem.Main,
+        NavItem.Favorite,
+        NavItem.Profile,
+    )
+    val bottomBarDestination = screens.any { it.route == currentDestination?.route }
+
+    if (bottomBarDestination) {
+        BottomNavigation(
+            elevation = 5.dp,
+            backgroundColor = Color.White
+        ) {
+            items.forEach { item ->
+                val selected = item.route == backStackEntry.value?.destination?.route
+                BottomNavigationItem(
+                    selected = selected,
+                    onClick = { onItemClick(item) },
+                    icon = {
+                        Icon(
+                            painterResource(id = item.icon!!),
+                            contentDescription = item.name
+                        )
+                    },
+                    label = { Text(text = item.name) },
+                    selectedContentColor = Color.Black,
+                    unselectedContentColor = Color.Gray,
+                )
+            }
         }
     }
 }

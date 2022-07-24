@@ -4,7 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.main_app.main_screen.components.SearchBar
 import com.example.myapplication.presentation.main_app.main_screen.components.SearchGrid
@@ -12,7 +12,7 @@ import com.example.myapplication.presentation.main_app.main_screen.components.Se
 @ExperimentalFoundationApi
 @Composable
 fun SearchScreen(
-    navController: NavHostController,
+    navController: NavController,
     token: String,
     mainViewModel: MainViewModel = hiltViewModel(),
 ) {

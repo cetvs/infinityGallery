@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.myapplication.R
 import com.example.myapplication.presentation.ui.theme.HintGray
@@ -26,7 +27,7 @@ import com.example.myapplication.presentation.ui.theme.SearchLightGray
 
 @Composable
 fun SearchBar(
-    navController: NavHostController
+    navController: NavController
 ) {
     Row {
         IconButton(onClick = { navController.popBackStack() }) {
