@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.myapplication.R
-import com.example.myapplication.domain.model.PictureInfo
+import com.example.myapplication.domain.model.EntityPictureInfo
 import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.home.models.NavItem
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -48,7 +48,7 @@ fun SearchGrid(navController: NavController, token: String, mainViewModel: MainV
 }
 
 @Composable
-fun SearchGridListItem(menuItem: PictureInfo, navController: NavController) {
+fun SearchGridListItem(menuItem: EntityPictureInfo, navController: NavController) {
     Column(Modifier.clickable {
         navController.navigate(NavItem.Details.route)
     }) {
@@ -58,7 +58,7 @@ fun SearchGridListItem(menuItem: PictureInfo, navController: NavController) {
 }
 
 @Composable
-fun SearchGridListImage(menuItem: PictureInfo) {
+fun SearchGridListImage(menuItem: EntityPictureInfo) {
     val scale = 1.1
     Box {
         AsyncImage(

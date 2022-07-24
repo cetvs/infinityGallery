@@ -3,7 +3,7 @@ package com.example.myapplication.data.source.local
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.myapplication.domain.model.PictureInfo
+import com.example.myapplication.domain.model.EntityPictureInfo
 import com.example.myapplication.domain.model.ProfileInfo
 import kotlinx.coroutines.flow.Flow
 
@@ -19,13 +19,13 @@ interface AppDao {
     fun getProfileInfo(): ProfileInfo?
 
     @Query("SELECT * FROM pictureInfo")
-    fun getPictureInfo(): Flow<List<PictureInfo>>
+    fun getPictureInfo(): Flow<List<EntityPictureInfo>>
 
     @Insert
-    fun insertPictureInfo(pictureInfo: List<PictureInfo>)
+    fun insertPicturesInfo(entityPictureInfo: List<EntityPictureInfo>)
 
     @Insert
-    fun updateFavoritePictureInfo(pictureInfo: PictureInfo)
+    fun updateFavoritePictureInfo(entityPictureInfo: EntityPictureInfo)
 
     @Query("DELETE FROM pictureInfo")
     fun deleteAllMenuItems()

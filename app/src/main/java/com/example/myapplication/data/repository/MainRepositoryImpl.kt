@@ -2,6 +2,7 @@ package com.example.myapplication.data.repository
 
 import com.example.myapplication.data.source.local.AppDao
 import com.example.myapplication.data.source.remote.SimpleApi
+import com.example.myapplication.domain.model.EntityPictureInfo
 import com.example.myapplication.domain.model.PictureInfo
 import com.example.myapplication.domain.model.ProfileInfo
 import com.example.myapplication.domain.model.ProfileRequestBody
@@ -12,7 +13,7 @@ class MainRepositoryImpl(
     private val appDao: AppDao,
     private var simpleApi: SimpleApi
 ) : MainRepository {
-    override suspend fun getProfileInfo(profileRequestBody: ProfileRequestBody): ProfileInfo {
+    override suspend fun getProfileInfo(profileRequestBody: ProfileRequestBody): ProfileInfo? {
         return simpleApi.getProfileInfo(profileRequestBody)
     }
 
@@ -23,7 +24,7 @@ class MainRepositoryImpl(
         simpleApi.postAuthLogout("Token $token")
     }
 
-    override fun getLocalPictureInfo(): Flow<List<PictureInfo>> =
+    override fun getLocalPictureInfo(): Flow<List<EntityPictureInfo>> =
         appDao.getPictureInfo()
 
     override fun getLocalProfileInfo(): ProfileInfo? =
@@ -33,8 +34,8 @@ class MainRepositoryImpl(
         appDao.insertProfileInfo(profileInfo)
     }
 
-    override fun insertPicturesInfo(picturesInfo: List<PictureInfo>) {
-        appDao.insertPictureInfo(picturesInfo)
+    override fun insertPicturesInfo(picturesInfo: List<EntityPictureInfo>) {
+        appDao.insertPicturesInfo(picturesInfo)
     }
 
     override fun deleteProfileInfo(){

@@ -24,10 +24,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myapplication.R
+import com.example.myapplication.common.BAD_REQUEST
+import com.example.myapplication.common.HAVE_NOT_INTERNET
 import com.example.myapplication.domain.model.ProfileRequestBody
 import com.example.myapplication.presentation.MainActivity
-import com.example.myapplication.presentation.home.components.TopBarText
 import com.example.myapplication.presentation.MainViewModel
+import com.example.myapplication.presentation.home.components.TopBarText
+import com.example.myapplication.presentation.registration.utils.phoneToString
 import com.example.myapplication.presentation.ui.theme.Purple
 
 
@@ -41,6 +44,8 @@ fun RegistrationScreen(
     var isClick by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val activity = (LocalContext.current as? Activity)
+    val loginTextState = remember { mutableStateOf(TextFieldValue(text = "")) }
+    val passwordTextState = remember { mutableStateOf("") }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -55,7 +60,6 @@ fun RegistrationScreen(
                 .padding(0.dp, 30.dp, 0.dp, 0.dp)
         ) {
             val source = remember { MutableInteractionSource() }
-            val loginTextState = remember { mutableStateOf(TextFieldValue(text = "")) }
             val focusManager = LocalFocusManager.current
             if (source.collectIsPressedAsState().value) {
                 loginTextState.value = TextFieldValue(text = "+7 (")
@@ -63,36 +67,45 @@ fun RegistrationScreen(
             LoginTextField(loginTextState, source, focusManager, isClick)
             if (isClick && loginTextState.value.text.isBlank()) TextIfTextFieldIsEmpty()
             val isPasswordVisibleState = remember { mutableStateOf(false) }
-            val passwordTextState = remember { mutableStateOf("") }
             PasswordTextField(isPasswordVisibleState, passwordTextState, isClick)
             if (isClick && passwordTextState.value.isBlank()) TextIfTextFieldIsEmpty()
         }
         Column(verticalArrangement = Arrangement.Bottom) {
             Button(
                 onClick = {
-                    if (false) {
-                        isClick = true
-                    } else {
-                        val profileInfo = mainViewModel.getProfileInfo(
-                            ProfileRequestBody("+79876543219", "qwerty")
+                    isClick
+                    val profileInfo = mainViewModel.getProfileInfo(
+                        ProfileRequestBody(
+                            loginTextState.value.phoneToString(),
+                            passwordTextState.value
                         )
-                        mainViewModel.deleteProfileInfo()
-                        mainViewModel.insertProfileInfo(profileInfo!!)
-                        val intent = Intent(context, MainActivity::class.java)
-                        context.startActivity(intent)
-                        activity?.finish()
+//                            ProfileRequestBody("+79876543219", "qwerty")
+                    )
+                    when (profileInfo.message) {
+                        "" -> {
+                            mainViewModel.insertProfileInfo(profileInfo.data!!)
+                            val intent = Intent(context, MainActivity::class.java)
+                            context.startActivity(intent)
+                            activity?.finish()
+                        }
+                        BAD_REQUEST -> {
+
+                        }
+                        HAVE_NOT_INTERNET -> {
+
+                        }
                     }
-                },
-                modifier = Modifier.size(380.dp, 48.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
-            ) {
-                Text(
-                    stringResource(R.string.Update),
-                    color = Color.White
-                )
-            }
-        }
+        },
+        modifier = Modifier.size(380.dp, 48.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
+        ) {
+        Text(
+            stringResource(R.string.Update),
+            color = Color.White
+        )
     }
+    }
+}
 }
 
 @Composable

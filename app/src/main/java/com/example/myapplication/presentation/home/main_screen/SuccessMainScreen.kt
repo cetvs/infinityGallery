@@ -4,6 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -27,6 +28,7 @@ fun SuccessMainScreen(navController: NavController, token: String, mainViewModel
     Column {
         Box(Modifier.height(50.dp)) {
             TopAppBar(
+                modifier = Modifier.padding(0.dp, 4.dp, 0.dp, 0.dp),
                 backgroundColor = Color.White,
                 contentColor = Color.Black,
                 title = {

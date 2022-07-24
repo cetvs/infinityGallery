@@ -33,7 +33,6 @@ fun MainCall(
 ) {
     val pictureInfoListState = mainViewModel.state.value
     Log.v("MainCall", "2")
-//    SearchScreen(navController = navController)
     when {
         pictureInfoListState.error.isNotBlank() -> {
             ErrorMainContentScreen(navController, token, mainViewModel)

@@ -6,9 +6,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.common.Resource
-import com.example.myapplication.domain.model.PictureInfo
+import com.example.myapplication.domain.model.EntityPictureInfo
 import com.example.myapplication.domain.model.ProfileInfo
 import com.example.myapplication.domain.model.ProfileRequestBody
+import com.example.myapplication.domain.model.toEntityPictureInfo
 import com.example.myapplication.domain.usecase.MainUseCases
 import com.example.myapplication.presentation.home.main_screen.PictureInfoListState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,8 +28,8 @@ class MainViewModel @Inject constructor(
     private val _state = mutableStateOf(PictureInfoListState())
     val state: State<PictureInfoListState> = _state
 
-    private val _localState = mutableStateOf(listOf<PictureInfo>())
-    val localState: State<List<PictureInfo>> = _localState
+    private val _localState = mutableStateOf(listOf<EntityPictureInfo>())
+    val localState: State<List<EntityPictureInfo>> = _localState
 
     fun getPictureInfo(token: String) {
         mainUseCases.getPictureInfo(token).onEach { result ->
@@ -38,9 +39,10 @@ class MainViewModel @Inject constructor(
                     viewModelScope.launch(Dispatchers.IO) {
                         mainUseCases.deleteAllMenuItems()
                         result.data?.let {
-                            for (el in it)
-                                Log.v("testSearch", el.id.toString())
-//                            mainUseCases.insertPicturesInfo(it)
+//                            for (el in it)
+//                                Log.v("testSearch", el.id.toString())
+
+                            mainUseCases.insertPicturesInfo(it.map { it.toEntityPictureInfo() })
                         }
                     }
                 }
@@ -52,10 +54,9 @@ class MainViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun getProfileInfo(profileRequestBody: ProfileRequestBody): ProfileInfo? =
+    fun getProfileInfo(profileRequestBody: ProfileRequestBody): Resource<ProfileInfo> =
         runBlocking {
-            val requestResult = mainUseCases.getProfileInfo(profileRequestBody)
-            if (requestResult.message != "") requestResult.data else null
+            mainUseCases.getProfileInfo(profileRequestBody)
         }
 
     fun postAuthLogout(token: String): Boolean =
@@ -66,6 +67,7 @@ class MainViewModel @Inject constructor(
 
     fun getLocalPictureInfo() {
         mainUseCases.getLocalPictureInfo().onEach { result ->
+            Log.v("getLocalPictureInfo", result[0].toString())
             _localState.value = result
         }
     }

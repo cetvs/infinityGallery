@@ -19,6 +19,5 @@ fun SearchScreen(
     Column {
         SearchBar(navController)
         SearchGrid(navController, token, mainViewModel)
-
     }
 }

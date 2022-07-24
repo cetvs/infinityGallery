@@ -17,7 +17,7 @@ interface SimpleApi {
     suspend fun getPictureInfo(@Header("Authorization") token: String): List<PictureInfo>
 
     @POST("auth/login")
-    suspend fun getProfileInfo(@Body requestBody: ProfileRequestBody): ProfileInfo
+    suspend fun getProfileInfo(@Body requestBody: ProfileRequestBody): ProfileInfo?
 
     @POST("auth/logout")
     suspend fun postAuthLogout(@Header("Authorization") token: String): Response<Unit>

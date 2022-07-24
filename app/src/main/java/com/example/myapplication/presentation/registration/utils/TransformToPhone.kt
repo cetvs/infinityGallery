@@ -58,3 +58,11 @@ fun TextFieldValue.transformToPhone(): TextFieldValue {
     }
     return TextFieldValue(text = result, selection = TextRange(index))
 }
+
+fun TextFieldValue.phoneToString(): String {
+    val str = this.text
+    val set = setOf(' ', '(', ')')
+    var result = ""
+    str.forEach { if (!set.contains(it)) result += it }
+    return result
+}
