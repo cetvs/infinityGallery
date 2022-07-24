@@ -16,7 +16,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.myapplication.R
 import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.main_app.main_screen.components.MainGrid

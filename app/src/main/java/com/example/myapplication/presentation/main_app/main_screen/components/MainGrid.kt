@@ -35,7 +35,7 @@ fun MainScreenContent(
 
 @ExperimentalFoundationApi
 @Composable
-fun MainGrid(navController: NavHostController, token: String, mainViewModel: MainViewModel) {
+fun MainGrid(navController: NavController, token: String, mainViewModel: MainViewModel) {
     val picturesState = mainViewModel.state.value
     SwipeRefresh(
         state = rememberSwipeRefreshState(false),
