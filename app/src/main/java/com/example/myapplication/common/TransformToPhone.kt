@@ -1,14 +1,17 @@
-package com.example.myapplication.presentation.registration.utils
+package com.example.myapplication.common
 
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 
+var pred = 0
+
 fun TextFieldValue.transformToPhone(): TextFieldValue {
+    // надо бы переделать)
     val str = this.text
     val size = str.length
-//    if (size == 0){
-//        return TextFieldValue(text = "")
-//    }
+    if (size == 0){
+        return TextFieldValue(text = "")
+    }
     var result = "+7 ("
     var index = 4
 

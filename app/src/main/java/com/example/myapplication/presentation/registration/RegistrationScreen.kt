@@ -10,8 +10,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,11 +31,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myapplication.R
 import com.example.myapplication.common.BAD_REQUEST
 import com.example.myapplication.common.HAVE_NOT_INTERNET
+import com.example.myapplication.common.phoneToString
 import com.example.myapplication.domain.model.ProfileRequestBody
 import com.example.myapplication.presentation.MainActivity
 import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.home.components.TopBarText
-import com.example.myapplication.presentation.registration.utils.phoneToString
 import com.example.myapplication.presentation.ui.theme.Purple
 
 
@@ -42,7 +46,7 @@ import com.example.myapplication.presentation.ui.theme.Purple
 fun RegistrationScreen(
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
-    var isClick by remember { mutableStateOf(false) }
+    val isClick by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val activity = (LocalContext.current as? Activity)
     val loginTextState = remember { mutableStateOf(TextFieldValue(text = "")) }
@@ -71,7 +75,14 @@ fun RegistrationScreen(
             val isPasswordVisibleState = remember { mutableStateOf(false) }
             PasswordTextField(isPasswordVisibleState, passwordTextState, isClick)
             if (isClick && passwordTextState.value.isBlank()) TextIfTextFieldIsEmpty()
+//            Image(
+//                painter = painterResource(R.drawable.ic_surf_edu),
+//                contentDescription = null,
+//                modifier = Modifier.size(230.dp),
+//                colorFilter = ColorFilter.tint(SurfEduColor)
+//            )
         }
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -89,15 +100,16 @@ fun RegistrationScreen(
                         text = errorMessage.value,
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(Purple),
+                            .background(Purple)
+                            .wrapContentHeight(align =  CenterVertically),
                         color = Color.White,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+
                     )
                 }
             }
             Button(
                 onClick = {
-//                    isClick
                     val profileInfo = mainViewModel.getProfileInfo(
                         ProfileRequestBody(
                             loginTextState.value.phoneToString(),
@@ -120,8 +132,7 @@ fun RegistrationScreen(
                         }
                     }
                 },
-                modifier = Modifier
-                    .size(380.dp, 48.dp),
+                modifier = Modifier.size(380.dp, 48.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
             ) {
                 Text(

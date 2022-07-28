@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.presentation.registration.utils.transformToPhone
+import com.example.myapplication.common.transformToPhone
 import com.example.myapplication.presentation.ui.theme.Purple
 import com.example.myapplication.presentation.ui.theme.RegistrationFieldBackground
 import com.example.myapplication.presentation.ui.theme.RegistrationFocusedIndicatorColor

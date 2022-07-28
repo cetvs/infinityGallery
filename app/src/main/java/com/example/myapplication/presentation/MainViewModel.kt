@@ -1,6 +1,5 @@
 package com.example.myapplication.presentation
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -39,9 +38,6 @@ class MainViewModel @Inject constructor(
                     viewModelScope.launch(Dispatchers.IO) {
                         mainUseCases.deleteAllMenuItems()
                         result.data?.let {
-//                            for (el in it)
-//                                Log.v("testSearch", el.id.toString())
-
                             mainUseCases.insertPicturesInfo(it.map { it.toEntityPictureInfo() })
                         }
                     }
@@ -67,7 +63,6 @@ class MainViewModel @Inject constructor(
 
     fun getLocalPictureInfo() {
         mainUseCases.getLocalPictureInfo().onEach { result ->
-            Log.v("getLocalPictureInfo", result[0].toString())
             _localState.value = result
         }
     }
