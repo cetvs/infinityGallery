@@ -3,6 +3,7 @@ package com.example.myapplication.presentation.registration
 import android.app.Activity
 import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
@@ -46,6 +47,7 @@ fun RegistrationScreen(
     val activity = (LocalContext.current as? Activity)
     val loginTextState = remember { mutableStateOf(TextFieldValue(text = "")) }
     val passwordTextState = remember { mutableStateOf("") }
+    val errorMessage = remember { mutableStateOf("") }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -56,7 +58,7 @@ fun RegistrationScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(545.dp)
+                .height(450.dp)
                 .padding(0.dp, 30.dp, 0.dp, 0.dp)
         ) {
             val source = remember { MutableInteractionSource() }
@@ -70,10 +72,32 @@ fun RegistrationScreen(
             PasswordTextField(isPasswordVisibleState, passwordTextState, isClick)
             if (isClick && passwordTextState.value.isBlank()) TextIfTextFieldIsEmpty()
         }
-        Column(verticalArrangement = Arrangement.Bottom) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(0.dp, 0.dp, 0.dp, 15.dp),
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            if (errorMessage.value != "") {
+                Column(
+                    modifier = Modifier
+                        .size(400.dp, 60.dp)
+                        .padding(0.dp, 0.dp, 0.dp, 15.dp),
+                ) {
+                    Text(
+                        text = errorMessage.value,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Purple),
+                        color = Color.White,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
             Button(
                 onClick = {
-                    isClick
+//                    isClick
                     val profileInfo = mainViewModel.getProfileInfo(
                         ProfileRequestBody(
                             loginTextState.value.phoneToString(),
@@ -89,23 +113,24 @@ fun RegistrationScreen(
                             activity?.finish()
                         }
                         BAD_REQUEST -> {
-
+                            errorMessage.value = "Логин или пароль введен неправильно"
                         }
                         HAVE_NOT_INTERNET -> {
-
+                            errorMessage.value = "Отсутствует соединение с интернетом"
                         }
                     }
-        },
-        modifier = Modifier.size(380.dp, 48.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
-        ) {
-        Text(
-            stringResource(R.string.Update),
-            color = Color.White
-        )
+                },
+                modifier = Modifier
+                    .size(380.dp, 48.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
+            ) {
+                Text(
+                    stringResource(R.string.Enter),
+                    color = Color.White
+                )
+            }
+        }
     }
-    }
-}
 }
 
 @Composable
