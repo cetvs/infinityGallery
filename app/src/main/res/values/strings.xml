@@ -3,5 +3,10 @@
     <string name="search_hint">Поиск</string>
     <string name="Update">Обновить</string>
     <string name="Gallery">Галерея</string>
-    <string name="Enter">Войти</string>
+    <string name="ENTER">Войти</string>
+    <string name="exit">Выйти</string>
+    <string name="city">Город</string>
+    <string name="phone">Телефон</string>
+    <string name="email">Почта</string>
+    <string name="profile">Профиль</string>
 </resources>

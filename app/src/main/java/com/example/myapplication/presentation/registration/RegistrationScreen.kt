@@ -1,6 +1,9 @@
+@file:OptIn(ExperimentalComposeUiApi::class)
+
 package com.example.myapplication.presentation.registration
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -10,10 +13,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -31,7 +31,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myapplication.R
 import com.example.myapplication.common.BAD_REQUEST
 import com.example.myapplication.common.HAVE_NOT_INTERNET
-import com.example.myapplication.common.phoneToString
 import com.example.myapplication.domain.model.ProfileRequestBody
 import com.example.myapplication.presentation.MainActivity
 import com.example.myapplication.presentation.MainViewModel
@@ -82,7 +81,6 @@ fun RegistrationScreen(
 //                colorFilter = ColorFilter.tint(SurfEduColor)
 //            )
         }
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -91,56 +89,73 @@ fun RegistrationScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (errorMessage.value != "") {
-                Column(
-                    modifier = Modifier
-                        .size(400.dp, 60.dp)
-                        .padding(0.dp, 0.dp, 0.dp, 15.dp),
-                ) {
-                    Text(
-                        text = errorMessage.value,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Purple)
-                            .wrapContentHeight(align =  CenterVertically),
-                        color = Color.White,
-                        textAlign = TextAlign.Center,
+                ErrorRequestToast(errorMessage)
+            }
+            LoginButton(mainViewModel, errorMessage, context, activity)
+        }
+    }
+}
 
-                    )
+@ExperimentalFoundationApi
+@Composable
+fun LoginButton(
+    mainViewModel: MainViewModel,
+    errorMessage: MutableState<String>,
+    context: Context,
+    activity: Activity?
+) {
+    Button(
+        onClick = {
+            val profileInfo = mainViewModel.getProfileInfo(
+//                        ProfileRequestBody(
+//                            loginTextState.value.phoneToString(),
+//                            passwordTextState.value
+//                        )
+                //TODO("")
+                ProfileRequestBody("+79876543219", "qwerty")
+            )
+            when (profileInfo.message) {
+                null -> {
+                    mainViewModel.insertProfileInfo(profileInfo.data!!)
+                    val intent = Intent(context, MainActivity::class.java)
+                    context.startActivity(intent)
+                    activity?.finish()
+                }
+                BAD_REQUEST -> {
+                    errorMessage.value = "Логин или пароль введен неправильно"
+                }
+                HAVE_NOT_INTERNET -> {
+                    errorMessage.value = "Отсутствует соединение с интернетом"
                 }
             }
-            Button(
-                onClick = {
-                    val profileInfo = mainViewModel.getProfileInfo(
-                        ProfileRequestBody(
-                            loginTextState.value.phoneToString(),
-                            passwordTextState.value
-                        )
-//                            ProfileRequestBody("+79876543219", "qwerty")
-                    )
-                    when (profileInfo.message) {
-                        "" -> {
-                            mainViewModel.insertProfileInfo(profileInfo.data!!)
-                            val intent = Intent(context, MainActivity::class.java)
-                            context.startActivity(intent)
-                            activity?.finish()
-                        }
-                        BAD_REQUEST -> {
-                            errorMessage.value = "Логин или пароль введен неправильно"
-                        }
-                        HAVE_NOT_INTERNET -> {
-                            errorMessage.value = "Отсутствует соединение с интернетом"
-                        }
-                    }
-                },
-                modifier = Modifier.size(380.dp, 48.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
-            ) {
-                Text(
-                    stringResource(R.string.Enter),
-                    color = Color.White
-                )
-            }
-        }
+        },
+        modifier = Modifier.size(380.dp, 48.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
+    ) {
+        Text(
+            stringResource(R.string.ENTER),
+            color = Color.White
+        )
+    }
+}
+
+@Composable
+fun ErrorRequestToast(errorMessage: MutableState<String>) {
+    Column(
+        modifier = Modifier
+            .size(400.dp, 60.dp)
+            .padding(0.dp, 0.dp, 0.dp, 15.dp),
+    ) {
+        Text(
+            text = errorMessage.value,
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Purple)
+                .wrapContentHeight(align = CenterVertically),
+            color = Color.White,
+            textAlign = TextAlign.Center,
+
+            )
     }
 }
 

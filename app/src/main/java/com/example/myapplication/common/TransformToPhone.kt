@@ -69,3 +69,9 @@ fun TextFieldValue.phoneToString(): String {
     str.forEach { if (!set.contains(it)) result += it }
     return result
 }
+
+fun String.transformToPhone(): String =
+    "+ ${this[1]} (${substring(2, 5)})" +
+            " ${substring(5, 8)}" +
+            " ${substring(8, 10)}" +
+            " ${substring(10, 12)}"
