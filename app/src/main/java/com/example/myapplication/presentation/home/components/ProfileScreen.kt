@@ -1,6 +1,7 @@
 package com.example.myapplication.presentation.home.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,28 +29,30 @@ import com.example.myapplication.domain.model.ProfileInfo
 import com.example.myapplication.domain.model.UserInfo
 import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.home.profile_screen.DialogProfile
+import com.example.myapplication.presentation.ui.theme.Purple
 
 @ExperimentalComposeUiApi
 @ExperimentalFoundationApi
 @Composable
 fun ProfileScreen(profileInfo: ProfileInfo, mainViewModel: MainViewModel = hiltViewModel()) {
     val isOpenDialog = remember { mutableStateOf(false) }
+    val errorMessage = remember { mutableStateOf("") }
 
     Column() {
         val userInfo = profileInfo.userInfo
         TopBarText(text = stringResource(R.string.profile))
         PhotoNameAndTag(userInfo)
         OtherUserDescription(userInfo)
-        ButtonExit(isOpenDialog)
+        ButtonExit(isOpenDialog, errorMessage)
     }
 
     if (isOpenDialog.value) {
-        DialogProfile(isOpenDialog, mainViewModel, profileInfo.token)
+        DialogProfile(isOpenDialog, errorMessage, mainViewModel, profileInfo.token)
     }
 }
 
 @Composable
-fun ButtonExit(isOpenDialog: MutableState<Boolean>) {
+fun ButtonExit(isOpenDialog: MutableState<Boolean>, errorMessage: MutableState<String>) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -56,6 +60,7 @@ fun ButtonExit(isOpenDialog: MutableState<Boolean>) {
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        ErrorExitToast(errorMessage)
         Button(
             onClick = {
                 isOpenDialog.value = true
@@ -67,6 +72,27 @@ fun ButtonExit(isOpenDialog: MutableState<Boolean>) {
             Text(
                 text = stringResource(R.string.exit),
                 color = Color.White
+            )
+        }
+    }
+}
+
+@Composable
+fun ErrorExitToast(errorMessage: MutableState<String>) {
+    Column(
+        modifier = Modifier
+            .size(400.dp, 60.dp)
+            .padding(0.dp, 0.dp, 0.dp, 15.dp),
+    ) {
+        if(errorMessage.value != "") {
+            Text(
+                text = errorMessage.value,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Purple)
+                    .wrapContentHeight(align = Alignment.CenterVertically),
+                color = Color.White,
+                textAlign = TextAlign.Center,
             )
         }
     }

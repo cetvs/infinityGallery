@@ -1,6 +1,5 @@
 package com.example.myapplication.presentation
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,9 +8,14 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import com.example.myapplication.presentation.home.main_screen.HomeScreen
+import androidx.navigation.compose.rememberNavController
+import com.example.myapplication.presentation.home.main_screen.SearchScreen
 import com.example.myapplication.presentation.ui.theme.MyApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,43 +26,44 @@ class MainActivity() : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val mainViewModel: MainViewModel by viewModels()
-//        mainViewModel.deleteProfileInfo()
-        val profileInfo = mainViewModel.getLocalProfileInfo()
-        if (profileInfo == null) {
-            val intent = Intent(this, RegistrationActivity::class.java)
-            startActivity(intent)
-            this.finish()
-        } else {
-            setContent {
-                MyApplicationTheme {
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colors.background
-                    ) {
-                        HomeScreen(profileInfo)
+        setContent {
+            MyApplicationTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    var isDelay by remember { mutableStateOf(true) }
+                    if (isDelay) {
+                        SplashScreen()
                     }
+                    val profileInfo = mainViewModel.getLocalProfileInfo()
+
+//                    if (profileInfo == null) {
+//                        val context = LocalContext.current
+//                        if (isDelay) {
+//                            LaunchedEffect(Unit) {
+//                                delay(800.microseconds)
+//                                isDelay = false
+//                            }
+//                        } else {
+//                            val intent = Intent(this, RegistrationActivity::class.java)
+//                            context.startActivity(intent)
+//                            this.finish()
+//                        }
+//                    } else {
+//                        if (isDelay) {
+//                            LaunchedEffect(Unit) {
+//                                delay(800.microseconds)
+//                                isDelay = false
+//                            }
+//                        } else {
+//                            HomeScreen(profileInfo)
+//                        }
+//                    }
+                    val navController = rememberNavController()
+                    SearchScreen(navController, profileInfo!!.token)
                 }
             }
         }
-
-//        setContent {
-//            MyApplicationTheme {
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colors.background
-//                ) {
-//                    var isDelayPassed by remember { mutableStateOf(false) }
-//                    LaunchedEffect(Unit) {
-//                        delay(800.microseconds)
-//                        isDelayPassed = false
-//                    }
-//                    val mainViewModel: MainViewModel = hiltViewModel()
-//                    val localPicture = mainViewModel.getLocalPictureInfo()
-//                    if ( localPicture != null) {
-//
-//                    }
-//                }
-//            }
-//        }
     }
 }

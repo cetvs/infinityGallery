@@ -13,13 +13,19 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.myapplication.common.HAVE_NOT_INTERNET
 import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.RegistrationActivity
 
 @ExperimentalComposeUiApi
 @ExperimentalFoundationApi
 @Composable
-fun DialogProfile(isOpenDialog: MutableState<Boolean>, mainViewModel: MainViewModel, token: String) {
+fun DialogProfile(
+    isOpenDialog: MutableState<Boolean>,
+    errorMessage: MutableState<String>,
+    mainViewModel: MainViewModel,
+    token: String
+) {
     val context = LocalContext.current
     val activity = (LocalContext.current as? Activity)
     AlertDialog(
@@ -37,15 +43,18 @@ fun DialogProfile(isOpenDialog: MutableState<Boolean>, mainViewModel: MainViewMo
                 modifier = Modifier
                     .clickable {
                         isOpenDialog.value = false
-                        if (mainViewModel.postAuthLogout(token)) {
-                            mainViewModel.deleteProfileInfo()
-                            //TODO("delete favorite")
-                            val intent = Intent(context, RegistrationActivity::class.java)
-                            context.startActivity(intent)
-                            activity?.finish()
-                        }
-                        else{
-                            //TODO("TOAST")
+                        val autoLogoutResponse = mainViewModel.postAuthLogout(token)
+                        when (autoLogoutResponse.message) {
+                            null -> {
+                                mainViewModel.deleteProfileInfo()
+                                //TODO("delete favorite")
+                                val intent = Intent(context, RegistrationActivity::class.java)
+                                context.startActivity(intent)
+                                activity?.finish()
+                            }
+                            HAVE_NOT_INTERNET -> {
+                                errorMessage.value = "Отсутствует соединение с интернетом"
+                            }
                         }
                     }
                     .padding(0.dp, 40.dp, 10.dp, 10.dp),

@@ -25,7 +25,17 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 @ExperimentalFoundationApi
 @Composable
 fun SearchGrid(navController: NavController, token: String, mainViewModel: MainViewModel) {
-    val picturesLocalState = mainViewModel.localState
+//    val pictureInfo = PictureInfo(
+//        "54",
+//        "Шлепа в тазике",
+//        "43",
+//        "https://i.pinimg.com/originals/1e/ad/f4/1eadf4027937d699a83ac0905d82204a.jpg",
+//        1655456376904
+//    )
+//    mainViewModel.insertPicturesInfo(listOf(pictureInfo))
+
+    val picturesLocalState = mainViewModel.localState.value
+//    Log.v("pictures", picturesLocalState.size.toString())
     mainViewModel.getLocalPictureInfo()
     SwipeRefresh(
         state = rememberSwipeRefreshState(false),
@@ -38,9 +48,9 @@ fun SearchGrid(navController: NavController, token: String, mainViewModel: MainV
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(
-                count = picturesLocalState.value.size,
+                count = picturesLocalState.size,
                 itemContent = {
-                    SearchGridListItem(picturesLocalState.value[it], navController)
+                    SearchGridListItem(picturesLocalState[it], navController)
                 }
             )
         }

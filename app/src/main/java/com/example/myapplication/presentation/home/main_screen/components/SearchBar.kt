@@ -16,7 +16,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -46,7 +45,6 @@ fun SearchBar(
     }
 }
 
-@Preview
 @Composable
 fun SearchTextField() {
     var textFieldValue by remember { mutableStateOf(TextFieldValue("")) }
@@ -100,63 +98,3 @@ fun SearchTextField() {
         }
     )
 }
-
-//изменить падинг '1.2.0-alpha04'
-//                    TextFieldDefaults.TextFieldDecorationBox(
-//                        value = "value",
-//                        visualTransformation = visualTransformation,
-//                        innerTextField = innerTextField,
-//                        singleLine = singleLine,
-//                        enabled = enabled,
-//                        interactionSource = interactionSource,
-//                        contentPadding = PaddingValues(0.dp), // this is how you can remove the padding
-//                    )
-
-//BasicTextField(
-//    value = text,
-//    onValueChange = { value ->
-//        text = value
-//    },
-//    modifier = Modifier
-//    .clip(shape = RoundedCornerShape(40.dp))
-//    //                    .height(38.dp)
-//    .fillMaxWidth(),
-//    textStyle = TextStyle(color = Color.White, fontSize = 14.sp),
-//    colors = TextFieldDefaults.textFieldColors(
-//    textColor = Color.White,
-//    cursorColor = Color.White,
-//    leadingIconColor = Color.White,
-//    trailingIconColor = Color.White,
-//    backgroundColor = Color.LightGray,
-//    focusedIndicatorColor = Color.Transparent,
-//    unfocusedIndicatorColor = Color.Transparent,
-//    disabledIndicatorColor = Color.Transparent
-//    )
-//)
-
-
-//    TextField(
-//        value = textFieldValue,
-//        onValueChange = { textFieldValue = it },
-//        leadingIcon = {
-//            Icon(
-//                painter = painterResource(
-//                    R.drawable.ic_search_15
-//                ),
-//                contentDescription = null,
-//                tint = HintGray
-//            )
-//        },
-//        textStyle = TextStyle(color = Color.Black, fontSize = 14.sp),
-//        colors = TextFieldDefaults.textFieldColors(
-//            backgroundColor = MaterialTheme.colors.surface
-//        ),
-//        placeholder = {
-//            Text("Поиск")
-//        },
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .height(56.dp)
-////                    .heightIn(min = 50.dp)
-//    )
-//}

@@ -25,5 +25,4 @@ class GetProfileInfo(
         } catch (e: IOException) {
             Resource.Error(HAVE_NOT_INTERNET)
         }
-
 }

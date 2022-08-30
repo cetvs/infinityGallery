@@ -154,7 +154,6 @@ fun ErrorRequestToast(errorMessage: MutableState<String>) {
                 .wrapContentHeight(align = CenterVertically),
             color = Color.White,
             textAlign = TextAlign.Center,
-
             )
     }
 }

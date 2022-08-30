@@ -55,23 +55,30 @@ class MainViewModel @Inject constructor(
             mainUseCases.getProfileInfo(profileRequestBody)
         }
 
-    fun postAuthLogout(token: String): Boolean =
+    fun postAuthLogout(token: String): Resource<Boolean> =
         runBlocking {
             mainUseCases.postAuthLogout(token)
         }
 
-
-    fun getLocalPictureInfo() {
-        mainUseCases.getLocalPictureInfo().onEach { result ->
-            _localState.value = result
+    fun getLocalPictureInfo(){
+        runBlocking(Dispatchers.IO){
+            mainUseCases.getLocalPictureInfo().onEach { _localState.value = it }
         }
     }
+//        mainUseCases.getLocalPictureInfo().onEach { result ->
+//            _localState.value = result
+//        }
+
+//    fun getLocalPictureInfo() {
+//        mainUseCases.getLocalPictureInfo().onEach { result ->
+//            _localState.value = result
+//        }
+//    }
 
     fun getLocalProfileInfo(): ProfileInfo? =
         runBlocking(Dispatchers.IO) {
             mainUseCases.getLocalProfileInfo()
         }
-
 
     fun insertProfileInfo(profileInfo: ProfileInfo) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -80,7 +87,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun deleteProfileInfo() {
-        runBlocking(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             mainUseCases.deleteProfileInfo()
         }
     }
