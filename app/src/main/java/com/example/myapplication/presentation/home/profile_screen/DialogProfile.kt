@@ -13,7 +13,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.common.HAVE_NOT_INTERNET
+import com.example.domain.common.HAVE_NOT_INTERNET
 import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.RegistrationActivity
 

@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.domain.model.ProfileInfo
+import com.example.domain.model.ProfileInfo
 import com.example.myapplication.presentation.home.models.NavItem
 import com.example.myapplication.presentation.home.navigation.HomeNavGraph
 

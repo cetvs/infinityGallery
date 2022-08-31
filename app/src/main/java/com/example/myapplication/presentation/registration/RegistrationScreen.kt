@@ -28,9 +28,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.domain.common.BAD_REQUEST
+import com.example.domain.common.HAVE_NOT_INTERNET
 import com.example.myapplication.R
-import com.example.myapplication.common.BAD_REQUEST
-import com.example.myapplication.common.HAVE_NOT_INTERNET
 import com.example.myapplication.domain.model.ProfileRequestBody
 import com.example.myapplication.presentation.MainActivity
 import com.example.myapplication.presentation.MainViewModel

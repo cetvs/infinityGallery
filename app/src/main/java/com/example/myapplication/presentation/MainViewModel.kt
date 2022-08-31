@@ -4,12 +4,12 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.common.Resource
-import com.example.myapplication.domain.model.EntityPictureInfo
-import com.example.myapplication.domain.model.ProfileInfo
+import com.example.domain.model.EntityPictureInfo
+import com.example.domain.model.ProfileInfo
+import com.example.domain.model.Resource
+import com.example.domain.model.toEntityPictureInfo
+import com.example.domain.usecase.MainUseCases
 import com.example.myapplication.domain.model.ProfileRequestBody
-import com.example.myapplication.domain.model.toEntityPictureInfo
-import com.example.myapplication.domain.usecase.MainUseCases
 import com.example.myapplication.presentation.home.main_screen.PictureInfoListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

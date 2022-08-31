@@ -6,8 +6,8 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.myapplication.domain.model.PictureInfo
-import com.example.myapplication.domain.model.ProfileInfo
+import com.example.domain.model.PictureInfo
+import com.example.domain.model.ProfileInfo
 import com.example.myapplication.presentation.home.components.FavoriteScreen
 import com.example.myapplication.presentation.home.components.MainScreen
 import com.example.myapplication.presentation.home.components.ProfileScreen

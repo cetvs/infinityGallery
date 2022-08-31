@@ -14,9 +14,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.example.domain.model.PictureInfo
 import com.example.myapplication.R
 import com.example.myapplication.common.convertLongToTime
-import com.example.myapplication.domain.model.PictureInfo
 
 @Composable
 fun MainInfoDetailsScreen(

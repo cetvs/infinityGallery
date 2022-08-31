@@ -63,6 +63,10 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
+    // Models
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+
     // Compose Text
     implementation "androidx.compose.ui:ui-text-google-fonts:1.2.0-beta01"
 

@@ -23,10 +23,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.example.domain.model.ProfileInfo
+import com.example.domain.model.UserInfo
 import com.example.myapplication.R
 import com.example.myapplication.common.transformToPhone
-import com.example.myapplication.domain.model.ProfileInfo
-import com.example.myapplication.domain.model.UserInfo
 import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.home.profile_screen.DialogProfile
 import com.example.myapplication.presentation.ui.theme.Purple

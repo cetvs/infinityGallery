@@ -15,8 +15,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.domain.model.EntityPictureInfo
 import com.example.myapplication.R
-import com.example.myapplication.domain.model.EntityPictureInfo
 import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.home.models.NavItem
 import com.google.accompanist.swiperefresh.SwipeRefresh
