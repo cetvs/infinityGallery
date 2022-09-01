@@ -6,7 +6,7 @@ import com.example.domain.model.EntityPictureInfo
 import com.example.domain.model.PictureInfo
 import com.example.domain.model.ProfileInfo
 import com.example.domain.repository.MainRepository
-import com.example.myapplication.domain.model.ProfileRequestBody
+import com.example.domain.model.ProfileRequestBody
 import kotlinx.coroutines.flow.Flow
 
 class MainRepositoryImpl(

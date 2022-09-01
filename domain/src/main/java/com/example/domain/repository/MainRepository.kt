@@ -3,7 +3,7 @@ package com.example.domain.repository
 import com.example.domain.model.EntityPictureInfo
 import com.example.domain.model.PictureInfo
 import com.example.domain.model.ProfileInfo
-import com.example.myapplication.domain.model.ProfileRequestBody
+import com.example.domain.model.ProfileRequestBody
 import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {

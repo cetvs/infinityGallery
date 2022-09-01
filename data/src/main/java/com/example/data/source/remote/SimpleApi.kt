@@ -2,7 +2,7 @@ package com.example.data.source.remote
 
 import com.example.domain.model.PictureInfo
 import com.example.domain.model.ProfileInfo
-import com.example.myapplication.domain.model.ProfileRequestBody
+import com.example.domain.model.ProfileRequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

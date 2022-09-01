@@ -1,4 +1,4 @@
-package com.example.myapplication.domain.model
+package com.example.domain.model
 
 data class ProfileRequestBody(
     val phone: String,

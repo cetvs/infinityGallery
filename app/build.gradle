@@ -51,6 +51,11 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.8.0'
+
+    // Models
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
@@ -62,10 +67,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
-
-    // Models
-    implementation project(path: ':domain')
-    implementation project(path: ':data')
 
     // Compose Text
     implementation "androidx.compose.ui:ui-text-google-fonts:1.2.0-beta01"

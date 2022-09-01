@@ -9,7 +9,7 @@ import com.example.domain.model.ProfileInfo
 import com.example.domain.model.Resource
 import com.example.domain.model.toEntityPictureInfo
 import com.example.domain.usecase.MainUseCases
-import com.example.myapplication.domain.model.ProfileRequestBody
+import com.example.domain.model.ProfileRequestBody
 import com.example.myapplication.presentation.home.main_screen.PictureInfoListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
