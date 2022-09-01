@@ -4,14 +4,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.EntityPictureInfo
-import com.example.domain.model.ProfileInfo
-import com.example.domain.model.Resource
-import com.example.domain.model.toEntityPictureInfo
+import com.example.domain.model.*
 import com.example.domain.usecase.MainUseCases
-import com.example.domain.model.ProfileRequestBody
 import com.example.myapplication.presentation.home.main_screen.PictureInfoListState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -19,7 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
-@HiltViewModel
+//@HiltViewModel
 class MainViewModel @Inject constructor(
     private val mainUseCases: MainUseCases
 ) : ViewModel() {

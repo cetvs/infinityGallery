@@ -15,13 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.example.myapplication.presentation.home.main_screen.HomeScreen
 import com.example.myapplication.presentation.ui.theme.MyApplicationTheme
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.microseconds
 
 @ExperimentalComposeUiApi
 @ExperimentalFoundationApi
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class MainActivity() : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
