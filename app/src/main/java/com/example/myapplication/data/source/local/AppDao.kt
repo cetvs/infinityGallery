@@ -19,13 +19,16 @@ interface AppDao {
     fun getProfileInfo(): ProfileInfo?
 
     @Query("SELECT * FROM pictureInfo")
-    fun getPictureInfo(): Flow<List<EntityPictureInfo>>
+    fun getPictureInfo(): List<EntityPictureInfo>
 
     @Insert
     fun insertPicturesInfo(entityPictureInfo: List<EntityPictureInfo>)
 
     @Insert
     fun updateFavoritePictureInfo(entityPictureInfo: EntityPictureInfo)
+
+    @Query("DELETE FROM pictureInfo WHERE id = :pictureId")
+    fun deletePicturesInfo(pictureId: String)
 
     @Query("DELETE FROM pictureInfo")
     fun deleteAllMenuItems()

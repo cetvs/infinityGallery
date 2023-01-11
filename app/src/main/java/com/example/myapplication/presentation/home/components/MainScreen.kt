@@ -1,6 +1,5 @@
 package com.example.myapplication.presentation.home.components
 
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,7 +31,6 @@ fun MainCall(
     mainViewModel: MainViewModel
 ) {
     val pictureInfoListState = mainViewModel.state.value
-    Log.v("MainCall", "2")
     when {
         pictureInfoListState.error.isNotBlank() -> {
             ErrorMainContentScreen(navController, token, mainViewModel)

@@ -35,12 +35,6 @@ class MainViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     _state.value = PictureInfoListState(value = result.data ?: emptyList())
-                    viewModelScope.launch(Dispatchers.IO) {
-                        mainUseCases.deleteAllMenuItems()
-                        result.data?.let {
-                            mainUseCases.insertPicturesInfo(it.map { it.toEntityPictureInfo() })
-                        }
-                    }
                 }
                 is Resource.Error ->
                     _state.value = PictureInfoListState(error = "internet error")
@@ -60,9 +54,9 @@ class MainViewModel @Inject constructor(
             mainUseCases.postAuthLogout(token)
         }
 
-    fun getLocalPictureInfo(){
-        runBlocking(Dispatchers.IO){
-            mainUseCases.getLocalPictureInfo().onEach { _localState.value = it }
+    fun getLocalPictureInfo(): List<EntityPictureInfo> {
+        return runBlocking(Dispatchers.IO) {
+            mainUseCases.getLocalPictureInfo()
         }
     }
 //        mainUseCases.getLocalPictureInfo().onEach { result ->

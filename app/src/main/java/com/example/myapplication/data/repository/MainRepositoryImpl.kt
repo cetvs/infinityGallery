@@ -24,7 +24,7 @@ class MainRepositoryImpl(
         simpleApi.postAuthLogout("Token $token")
     }
 
-    override fun getLocalPictureInfo(): Flow<List<EntityPictureInfo>> =
+    override fun getLocalPictureInfo(): List<EntityPictureInfo> =
         appDao.getPictureInfo()
 
     override fun getLocalProfileInfo(): ProfileInfo? =
@@ -40,6 +40,10 @@ class MainRepositoryImpl(
 
     override fun deleteProfileInfo(){
         appDao.deleteProfileInfo()
+    }
+
+    override fun deletePictureInfo(pictureInfo: PictureInfo){
+        appDao.deletePicturesInfo(pictureInfo.id)
     }
 
     override fun deleteAllMenuItems() {

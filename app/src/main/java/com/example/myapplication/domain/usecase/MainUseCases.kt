@@ -9,5 +9,6 @@ class MainUseCases(
     val insertProfileInfo: InsertProfileInfo,
     val insertPicturesInfo: InsertPicturesInfo,
     val deleteProfileInfo: DeleteProfileInfo,
+    val deletePictureInfo: DeletePictureInfo,
     val deleteAllMenuItems: DeleteAllMenuItems
 )

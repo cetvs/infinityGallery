@@ -29,7 +29,7 @@ fun ErrorMainContentScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize()
     ) {
-        TopBarText(text = "Галерея")
+        TopBarText(text = stringResource(R.string.Gallery))
         Column(
             modifier = Modifier.fillMaxHeight(0.8f),
             verticalArrangement = Arrangement.Center,

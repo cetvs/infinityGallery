@@ -3,6 +3,7 @@ package com.example.myapplication.di
 import android.app.Application
 import androidx.room.Room
 import com.example.myapplication.data.repository.MainRepositoryImpl
+import com.example.myapplication.data.repository.MockMainRepositoryImpl
 import com.example.myapplication.data.source.local.AppDatabase
 import com.example.myapplication.data.source.remote.Constants
 import com.example.myapplication.data.source.remote.SimpleApi
@@ -48,8 +49,14 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRepositoryDatabase(db: AppDatabase, simpleApi: SimpleApi): MainRepository {
-        return MainRepositoryImpl(db.menuDao(), simpleApi)
+        return MockMainRepositoryImpl(db.menuDao(), simpleApi)
     }
+
+//    @Provides
+//    @Singleton
+//    fun provideRepositoryDatabase(db: AppDatabase, simpleApi: SimpleApi): MainRepository {
+//        return MainRepositoryImpl(db.menuDao(), simpleApi)
+//    }
 
     @Provides
     @Singleton
@@ -62,6 +69,7 @@ object AppModule {
             getLocalPictureInfo = GetLocalPictureInfo(mainRepository),
             insertProfileInfo = InsertProfileInfo(mainRepository),
             insertPicturesInfo = InsertPicturesInfo(mainRepository),
+            deletePictureInfo = DeletePictureInfo(mainRepository),
             deleteProfileInfo = DeleteProfileInfo(mainRepository),
             deleteAllMenuItems = DeleteAllMenuItems(mainRepository),
         )

@@ -8,35 +8,29 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.myapplication.R
+import com.example.myapplication.domain.model.EntityPictureInfo
 import com.example.myapplication.domain.model.PictureInfo
+import com.example.myapplication.domain.model.toEntityPictureInfo
 import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.home.models.NavItem
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
-@ExperimentalFoundationApi
-@Composable
-fun MainScreenContent(
-    navController: NavHostController,
-    mainViewModel: MainViewModel,
-) {
-//    MainGrid(navController, token, mainViewModel)
-}
-
+lateinit var favorites: MutableList<EntityPictureInfo>
 
 @ExperimentalFoundationApi
 @Composable
 fun MainGrid(navController: NavController, token: String, mainViewModel: MainViewModel) {
     val picturesState = mainViewModel.state.value
+    favorites = mainViewModel.getLocalPictureInfo().toMutableList()
     SwipeRefresh(
         state = rememberSwipeRefreshState(false),
         onRefresh = { mainViewModel.getPictureInfo(token) },
@@ -50,7 +44,7 @@ fun MainGrid(navController: NavController, token: String, mainViewModel: MainVie
             items(
                 count = picturesState.value.size,
                 itemContent = {
-                    MainGridListItem(picturesState.value[it], it, navController)
+                    MainGridListItem(picturesState.value[it], navController)
                 }
             )
         }
@@ -58,42 +52,52 @@ fun MainGrid(navController: NavController, token: String, mainViewModel: MainVie
 }
 
 @Composable
-fun MainGridListItem(menuItem: PictureInfo, index: Int, navController: NavController) {
-    Column(Modifier.clickable {
-        val arguments = navController.currentBackStackEntry?.arguments
-        arguments?.putParcelable("MENU_ITEM", menuItem)
-        navController.navigate(NavItem.Details.route)
-    }) {
-        MainGridListImage(menuItem = menuItem, index = index)
+fun MainGridListItem(
+    menuItem: PictureInfo,
+    navController: NavController,
+) {
+    Column(
+        Modifier.clickable {
+            val arguments = navController.currentBackStackEntry?.arguments
+            arguments?.putParcelable("MENU_ITEM", menuItem)
+            navController.navigate(NavItem.Details.route)
+        }
+    ) {
+        MainGridListImage(menuItem = menuItem)
         Text(text = menuItem.title)
     }
 }
 
 @Composable
-fun MainGridListImage(menuItem: PictureInfo, index: Int) {
+fun MainGridListImage(menuItem: PictureInfo) {
+    val foundedIndex = favorites.indexOfFirst { it.id == menuItem.id }
+    val icon = if (foundedIndex == -1) R.drawable.ic_unfavorite else R.drawable.ic_favorite
+    var favoriteIcon by remember { mutableStateOf(icon) }
+    favoriteIcon = icon
     val scale = 1.1
     Box() {
         AsyncImage(
             model = menuItem.photoUrl,
             contentDescription = null,
-            modifier = Modifier
-                .size((160 * scale).dp, (222 * scale).dp)
+            modifier = Modifier.size((160 * scale).dp, (222 * scale).dp)
         )
         IconButton(
             onClick = {
-//                favorite[index] = !favorite[index]
+                val index = favorites.indexOfFirst { it.id == menuItem.id }
+                if ((index == -1)) {
+                    favoriteIcon = R.drawable.ic_favorite
+                    favorites.add(menuItem.toEntityPictureInfo())
+                } else {
+                    favoriteIcon = R.drawable.ic_unfavorite
+                    favorites.removeAt(index)
+                }
             },
             modifier = Modifier.padding(130.dp, 0.dp, 0.dp, 0.dp),
-
-            ) {
+        ) {
             Icon(
-                painter = painterResource(
-//                    id = if (favorite[index])
-                    R.drawable.ic_favorite
-//                    else R.drawable.ic_unfavorite
-                ),
+                painter = painterResource(id = favoriteIcon),
                 contentDescription = null,
-                tint = Color.White
+                tint = Color.Gray
             )
         }
     }

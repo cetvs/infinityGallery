@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 class GetLocalPictureInfo(
     private val repository: MainRepository
 ) {
-    operator fun invoke(): Flow<List<EntityPictureInfo>> {
+    operator fun invoke(): List<EntityPictureInfo> {
         return repository.getLocalPictureInfo()
     }
 }
