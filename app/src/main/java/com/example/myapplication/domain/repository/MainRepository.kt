@@ -4,7 +4,6 @@ import com.example.myapplication.domain.model.EntityPictureInfo
 import com.example.myapplication.domain.model.PictureInfo
 import com.example.myapplication.domain.model.ProfileInfo
 import com.example.myapplication.domain.model.ProfileRequestBody
-import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {
     suspend fun getProfileInfo(profileRequestBody: ProfileRequestBody): ProfileInfo?
@@ -16,5 +15,5 @@ interface MainRepository {
     fun deleteProfileInfo()
     fun getLocalProfileInfo(): ProfileInfo?
     suspend fun postAuthLogout(token: String)
-    fun deletePictureInfo(pictureInfo: PictureInfo)
+    fun deletePictureInfo(id: String)
 }

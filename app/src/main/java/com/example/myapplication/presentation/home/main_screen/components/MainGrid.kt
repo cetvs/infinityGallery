@@ -44,7 +44,7 @@ fun MainGrid(navController: NavController, token: String, mainViewModel: MainVie
             items(
                 count = picturesState.value.size,
                 itemContent = {
-                    MainGridListItem(picturesState.value[it], navController)
+                    MainGridListItem(picturesState.value[it], navController, mainViewModel)
                 }
             )
         }
@@ -55,6 +55,7 @@ fun MainGrid(navController: NavController, token: String, mainViewModel: MainVie
 fun MainGridListItem(
     menuItem: PictureInfo,
     navController: NavController,
+    mainViewModel: MainViewModel
 ) {
     Column(
         Modifier.clickable {
@@ -63,13 +64,13 @@ fun MainGridListItem(
             navController.navigate(NavItem.Details.route)
         }
     ) {
-        MainGridListImage(menuItem = menuItem)
+        MainGridListImage(menuItem = menuItem, mainViewModel = mainViewModel)
         Text(text = menuItem.title)
     }
 }
 
 @Composable
-fun MainGridListImage(menuItem: PictureInfo) {
+fun MainGridListImage(menuItem: PictureInfo, mainViewModel: MainViewModel) {
     val foundedIndex = favorites.indexOfFirst { it.id == menuItem.id }
     val icon = if (foundedIndex == -1) R.drawable.ic_unfavorite else R.drawable.ic_favorite
     var favoriteIcon by remember { mutableStateOf(icon) }
@@ -87,9 +88,11 @@ fun MainGridListImage(menuItem: PictureInfo) {
                 if ((index == -1)) {
                     favoriteIcon = R.drawable.ic_favorite
                     favorites.add(menuItem.toEntityPictureInfo())
+                    mainViewModel.insertPictureInfo(picturesInfo = listOf(menuItem.toEntityPictureInfo()))
                 } else {
                     favoriteIcon = R.drawable.ic_unfavorite
                     favorites.removeAt(index)
+                    mainViewModel.deletePictureInfo(menuItem.id)
                 }
             },
             modifier = Modifier.padding(130.dp, 0.dp, 0.dp, 0.dp),

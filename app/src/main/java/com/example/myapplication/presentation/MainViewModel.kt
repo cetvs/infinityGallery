@@ -5,10 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.common.Resource
-import com.example.myapplication.domain.model.EntityPictureInfo
-import com.example.myapplication.domain.model.ProfileInfo
-import com.example.myapplication.domain.model.ProfileRequestBody
-import com.example.myapplication.domain.model.toEntityPictureInfo
+import com.example.myapplication.domain.model.*
 import com.example.myapplication.domain.usecase.MainUseCases
 import com.example.myapplication.presentation.home.main_screen.PictureInfoListState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -59,15 +56,6 @@ class MainViewModel @Inject constructor(
             mainUseCases.getLocalPictureInfo()
         }
     }
-//        mainUseCases.getLocalPictureInfo().onEach { result ->
-//            _localState.value = result
-//        }
-
-//    fun getLocalPictureInfo() {
-//        mainUseCases.getLocalPictureInfo().onEach { result ->
-//            _localState.value = result
-//        }
-//    }
 
     fun getLocalProfileInfo(): ProfileInfo? =
         runBlocking(Dispatchers.IO) {
@@ -77,6 +65,18 @@ class MainViewModel @Inject constructor(
     fun insertProfileInfo(profileInfo: ProfileInfo) {
         viewModelScope.launch(Dispatchers.IO) {
             mainUseCases.insertProfileInfo(profileInfo)
+        }
+    }
+
+    fun insertPictureInfo(picturesInfo: List<EntityPictureInfo>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            mainUseCases.insertPicturesInfo(picturesInfo)
+        }
+    }
+
+    fun deletePictureInfo(id: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            mainUseCases.deletePictureInfo(id)
         }
     }
 

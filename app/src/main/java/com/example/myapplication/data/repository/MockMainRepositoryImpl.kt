@@ -7,7 +7,6 @@ import com.example.myapplication.domain.model.PictureInfo
 import com.example.myapplication.domain.model.ProfileInfo
 import com.example.myapplication.domain.model.ProfileRequestBody
 import com.example.myapplication.domain.repository.MainRepository
-import kotlinx.coroutines.flow.Flow
 
 class MockMainRepositoryImpl(
     private val appDao: AppDao,
@@ -45,8 +44,8 @@ class MockMainRepositoryImpl(
         appDao.deleteProfileInfo()
     }
 
-    override fun deletePictureInfo(pictureInfo: PictureInfo){
-        appDao.deletePicturesInfo(pictureInfo.id)
+    override fun deletePictureInfo(id: String){
+        appDao.deletePicturesInfo(id)
     }
 
     override fun deleteAllMenuItems() {

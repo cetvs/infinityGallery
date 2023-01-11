@@ -7,7 +7,7 @@ import com.example.myapplication.domain.repository.MainRepository
 class DeletePictureInfo(
     private val repository: MainRepository
 ) {
-    operator fun invoke(pictureInfo: PictureInfo) {
-        repository.deletePictureInfo(pictureInfo)
+    operator fun invoke(id: String) {
+        repository.deletePictureInfo(id)
     }
 }

@@ -42,8 +42,8 @@ class MainRepositoryImpl(
         appDao.deleteProfileInfo()
     }
 
-    override fun deletePictureInfo(pictureInfo: PictureInfo){
-        appDao.deletePicturesInfo(pictureInfo.id)
+    override fun deletePictureInfo(id: String){
+        appDao.deletePicturesInfo(id)
     }
 
     override fun deleteAllMenuItems() {
