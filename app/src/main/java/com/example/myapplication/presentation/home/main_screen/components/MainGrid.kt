@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.myapplication.R
+import com.example.myapplication.common.URLParser
 import com.example.myapplication.domain.model.EntityPictureInfo
 import com.example.myapplication.domain.model.PictureInfo
 import com.example.myapplication.domain.model.toEntityPictureInfo
@@ -23,6 +24,9 @@ import com.example.myapplication.presentation.MainViewModel
 import com.example.myapplication.presentation.home.models.NavItem
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.google.gson.Gson
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 lateinit var favorites: MutableList<EntityPictureInfo>
 
@@ -59,9 +63,10 @@ fun MainGridListItem(
 ) {
     Column(
         Modifier.clickable {
-            val arguments = navController.currentBackStackEntry?.arguments
-            arguments?.putParcelable("MENU_ITEM", menuItem)
-            navController.navigate(NavItem.Details.route)
+            val encodeUrl = URLParser('^').encode(menuItem.photoUrl)
+            val pictureInfo = menuItem.copy(photoUrl = encodeUrl)
+            val gsonPictureInfo = Gson().toJson(pictureInfo)
+            navController.navigate("${NavItem.Details.route}/$gsonPictureInfo")
         }
     ) {
         MainGridListImage(menuItem = menuItem, mainViewModel = mainViewModel)

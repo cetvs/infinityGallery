@@ -1,6 +1,7 @@
 package com.example.myapplication.presentation.home.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -17,24 +18,16 @@ import com.example.myapplication.presentation.MainViewModel
 @Composable
 fun FavoriteScreen(mainViewModel: MainViewModel = hiltViewModel()) {
     TopBarText(text = "Мои избранные")
-    val state = remember {
-        val list = mutableListOf<EntityPictureInfo>()
-        for (el in mainViewModel.localState.value)
-            if (el.FavoriteDate != "")
-                list.add(el)
-        return@remember mutableStateOf(list)
-    }
-
-    mainViewModel.getLocalPictureInfo()
-
-    LazyRow() {
-        items(
-            count = state.value.size,
-            itemContent = {
-                MainGridListItem(state.value[it])
-            }
-        )
-    }
+//    val favorite = mainViewModel.getLocalPictureInfo()
+//
+//    LazyColumn() {
+//        items(
+//            count = favorite.size,
+//            itemContent = {
+//                MainGridListItem(favorite[it])
+//            }
+//        )
+//    }
 }
 
 @Composable

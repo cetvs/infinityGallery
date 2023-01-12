@@ -8,6 +8,6 @@ data class PictureInfo(
     val id: String,
     val title: String,
     val content: String,
-    val photoUrl: String,
+    var photoUrl: String,
     val publicationDate: Long,
 ) : Parcelable
