@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.myapplication.common.URLParser
-import com.example.myapplication.domain.model.PictureInfo
+import com.example.myapplication.domain.model.DrinksInfoUi
 import com.example.myapplication.domain.model.ProfileInfo
 import com.example.myapplication.domain.model.UserInfo
 import com.example.myapplication.presentation.home.components.FavoriteScreen
@@ -19,8 +19,6 @@ import com.example.myapplication.presentation.home.main_screen.MainInfoDetailsSc
 import com.example.myapplication.presentation.home.main_screen.SearchScreen
 import com.example.myapplication.presentation.home.models.NavItem
 import com.google.gson.Gson
-import java.net.URLDecoder
-import java.net.URLEncoder
 
 @ExperimentalComposeUiApi
 @ExperimentalFoundationApi
@@ -48,9 +46,9 @@ fun HomeNavGraph(navController: NavHostController) {
             )
         ) {
             val jsonPictureInfo = it.arguments?.getString("jsonPictureInfo")
-            var pictureInfo = Gson().fromJson(jsonPictureInfo, PictureInfo::class.java)
-            pictureInfo.photoUrl =  URLParser('^').decode(pictureInfo.photoUrl)
-            MainInfoDetailsScreen(navController, pictureInfo)
+            val drinkInfo = Gson().fromJson(jsonPictureInfo, DrinksInfoUi::class.java)
+            val decodedDrink = drinkInfo.copy(imageUrl = URLParser('^').decode(drinkInfo.imageUrl))
+            MainInfoDetailsScreen(navController, decodedDrink)
         }
         composable(
             route = NavItem.Search.route

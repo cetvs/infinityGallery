@@ -1,6 +1,5 @@
 package com.example.myapplication.presentation.home.main_screen.components
 
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -102,17 +101,31 @@ private fun MainGridListItem(
     mainViewModel: MainViewModel,
 ) {
     Column(
-        modifier = Modifier.clickable {
-            val encodeUrl = URLParser('^').encode(menuItem.imageUrl)
-            val drinkInfoRemote = menuItem.copy(imageUrl = encodeUrl)
-            val gsonPictureInfo = Gson().toJson(drinkInfoRemote)
-            navController.navigate("${NavItem.Details.route}/$gsonPictureInfo")
-        },
+        modifier = Modifier
+            .padding(0.dp, 0.dp, 0.dp, 10.dp)
+            .clickable {
+                itemClickAction(menuItem, navController)
+            },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         MainGridListImage(menuItem = menuItem, mainViewModel = mainViewModel)
         Text(text = menuItem.name)
     }
+}
+
+fun itemClickAction(drink: DrinksInfoUi, navController: NavController) {
+    val encodeUrl = URLParser('^').encode(drink.imageUrl)
+    var fixDescription = ""
+    drink.description.forEach { char ->
+        if (char == '?') {
+            fixDescription += '.'
+        } else {
+            fixDescription += char
+        }
+    }
+    val drinkInfoRemote = drink.copy(imageUrl = encodeUrl, description = fixDescription)
+    val gsonPictureInfo = Gson().toJson(drinkInfoRemote)
+    navController.navigate("${NavItem.Details.route}/$gsonPictureInfo")
 }
 
 @Composable

@@ -1,6 +1,5 @@
 package com.example.myapplication.presentation.home.main_screen
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -20,16 +19,16 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.myapplication.R
 import com.example.myapplication.common.convertLongToTime
-import com.example.myapplication.domain.model.PictureInfo
+import com.example.myapplication.domain.model.DrinksInfoUi
 
 @Composable
 fun MainInfoDetailsScreen(
     navController: NavHostController,
-    pictureInfo: PictureInfo
+    drinksInfoUi: DrinksInfoUi
 ) {
     Column() {
         TopBar(navController)
-        PictureInfoDetails(pictureInfo)
+        PictureInfoDetails(drinksInfoUi)
     }
 }
 
@@ -53,30 +52,24 @@ fun TopBar(navController: NavHostController) {
 }
 
 @Composable
-fun PictureInfoDetails(pictureInfo: PictureInfo) {
+fun PictureInfoDetails(drinksInfoUi: DrinksInfoUi) {
     Column(
         modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 0.dp)
     ) {
         AsyncImage(
-            model = pictureInfo.photoUrl,
+            model = drinksInfoUi.imageUrl,
             contentDescription = null,
             modifier = Modifier.size(380.dp)
         )
         Row() {
             Text(
-                text = pictureInfo.title,
+                text = drinksInfoUi.name,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp
             )
-            Text(
-                text = pictureInfo.publicationDate.convertLongToTime(),
-                modifier = Modifier.padding(150.dp, 0.dp, 4.dp, 0.dp),
-                fontSize = 10.sp,
-                color = Color.Gray,
-            )
         }
         Text(
-            text = pictureInfo.content,
+            text = drinksInfoUi.description,
             modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp),
             fontSize = 12.sp
         )
