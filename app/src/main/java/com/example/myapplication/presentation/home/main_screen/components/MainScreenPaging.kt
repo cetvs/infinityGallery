@@ -140,6 +140,8 @@ private fun MainGridListImage(menuItem: DrinksInfoUi, mainViewModel: MainViewMod
     favoriteIcon = icon
     val scale = 1.1
     Box(
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
     ) {
         AsyncImage(
             model = menuItem.imageUrl,
@@ -159,7 +161,7 @@ private fun MainGridListImage(menuItem: DrinksInfoUi, mainViewModel: MainViewMod
                     mainViewModel.deleteFavoriteDrink(menuItem.id.toString())
                 }
             },
-            modifier = Modifier.padding(200.dp, 0.dp, 0.dp, 0.dp),
+            modifier = Modifier.padding(200.dp, 0.dp, 0.dp, 300.dp),
         ) {
             Icon(
                 painter = painterResource(id = favoriteIcon),
