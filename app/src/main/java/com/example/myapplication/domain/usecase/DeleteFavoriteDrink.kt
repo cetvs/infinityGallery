@@ -1,12 +1,12 @@
 package com.example.myapplication.domain.usecase
 
+import com.example.myapplication.domain.model.FavoriteDrink
 import com.example.myapplication.domain.repository.MainRepository
 
-
-class DeleteProfileInfo(
+class DeleteFavoriteDrink(
     private val repository: MainRepository
 ) {
-    operator fun invoke() {
-        repository.deleteProfileInfo()
+    operator fun invoke(id: String) {
+        repository.deleteFavoriteDrink(id)
     }
 }

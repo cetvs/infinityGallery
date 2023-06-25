@@ -1,46 +1,46 @@
 package com.example.myapplication.data.repository
 
 import com.example.myapplication.data.source.local.AppDao
-import com.example.myapplication.data.source.remote.SimpleApi
+import com.example.myapplication.data.source.remote.DrinksApi
+import com.example.myapplication.domain.model.DrinkInfoRemote
 import com.example.myapplication.domain.model.EntityPictureInfo
-import com.example.myapplication.domain.model.PictureInfo
+import com.example.myapplication.domain.model.FavoriteDrink
 import com.example.myapplication.domain.model.ProfileInfo
-import com.example.myapplication.domain.model.ProfileRequestBody
 import com.example.myapplication.domain.repository.MainRepository
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 class MainRepositoryImpl(
     private val appDao: AppDao,
-    private var simpleApi: SimpleApi
+    private var drinksApi: DrinksApi,
 ) : MainRepository {
-    override suspend fun getProfileInfo(profileRequestBody: ProfileRequestBody): ProfileInfo? {
-        return simpleApi.getProfileInfo(profileRequestBody)
+
+    override suspend fun getDrinksInfoRemote(page: Int): List<DrinkInfoRemote> {
+        val map = mutableMapOf<String, Int>().also {
+            it["page"] = page
+        }
+        return drinksApi.getDrinksInfo(map)
     }
 
-    override suspend fun getPictureInfo(token: String): List<PictureInfo> =
-        simpleApi.getPictureInfo("Token $token")
+    override suspend fun getFavoriteDrink(): List<FavoriteDrink> {
+        return appDao.getFavoriteDrinks()
+    }
 
-    override suspend fun postAuthLogout(token: String) {
-        simpleApi.postAuthLogout("Token $token")
+    override fun insertFavoriteDrink(favoriteDrink: FavoriteDrink) {
+        appDao.insertFavoriteDrink(favoriteDrink)
+    }
+
+    override fun deleteFavoriteDrink(id: String) {
+        appDao.deleteFavoriteDrink(id)
     }
 
     override fun getLocalPictureInfo(): List<EntityPictureInfo> =
         appDao.getPictureInfo()
 
-    override fun getLocalProfileInfo(): ProfileInfo? =
-        appDao.getProfileInfo()
-
-    override fun insertProfileInfo(profileInfo: ProfileInfo) {
-        appDao.insertProfileInfo(profileInfo)
-    }
-
     override fun insertPicturesInfo(picturesInfo: List<EntityPictureInfo>) {
         appDao.insertPicturesInfo(picturesInfo)
     }
 
-    override fun deleteProfileInfo(){
-        appDao.deleteProfileInfo()
-    }
 
     override fun deletePictureInfo(id: String){
         appDao.deletePicturesInfo(id)

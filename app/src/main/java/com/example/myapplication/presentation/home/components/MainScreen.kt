@@ -18,7 +18,7 @@ fun MainScreen(
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
     LaunchedEffect(key1 = token) {
-        mainViewModel.getPictureInfo(token)
+        mainViewModel.getDrinksInfoRemote()
     }
     MainCall(navController, token, mainViewModel)
 }
@@ -30,16 +30,5 @@ fun MainCall(
     token: String,
     mainViewModel: MainViewModel
 ) {
-    val pictureInfoListState = mainViewModel.state.value
-    when {
-        pictureInfoListState.error.isNotBlank() -> {
-            ErrorMainContentScreen(navController, token, mainViewModel)
-        }
-        pictureInfoListState.value.isNotEmpty() -> {
-            SuccessMainScreen(navController, token, mainViewModel)
-        }
-        pictureInfoListState.isLoading -> {
-            LoadingScreen()
-        }
-    }
+    SuccessMainScreen(navController, token, mainViewModel)
 }

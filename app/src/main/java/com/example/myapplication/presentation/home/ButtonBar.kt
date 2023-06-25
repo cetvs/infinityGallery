@@ -17,7 +17,7 @@ import com.example.myapplication.presentation.home.navigation.HomeNavGraph
 @ExperimentalComposeUiApi
 @ExperimentalFoundationApi
 @Composable
-fun ButtonBar(profileInfo: ProfileInfo) {
+fun ButtonBar() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
@@ -34,7 +34,7 @@ fun ButtonBar(profileInfo: ProfileInfo) {
             )
         }
     ) {
-        HomeNavGraph(navController, profileInfo)
+        HomeNavGraph(navController)
     }
 }
 

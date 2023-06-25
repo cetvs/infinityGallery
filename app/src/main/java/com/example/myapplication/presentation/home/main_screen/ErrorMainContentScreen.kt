@@ -49,7 +49,7 @@ fun ErrorMainContentScreen(
             )
         }
         Button(
-            onClick = { mainViewModel.getPictureInfo(token) }, Modifier.size(380.dp, 48.dp),
+            onClick = {}, Modifier.size(380.dp, 48.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
         ) {
             Text(

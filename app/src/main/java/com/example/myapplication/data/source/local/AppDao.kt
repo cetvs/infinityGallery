@@ -1,25 +1,30 @@
 package com.example.myapplication.data.source.local
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.myapplication.domain.model.EntityPictureInfo
-import com.example.myapplication.domain.model.ProfileInfo
-import kotlinx.coroutines.flow.Flow
+import com.example.myapplication.domain.model.FavoriteDrink
 
 @Dao
 interface AppDao {
-    @Insert
-    fun insertProfileInfo(profileInfo: ProfileInfo)
 
-    @Query("DELETE FROM profileInfo")
-    fun deleteProfileInfo()
+    @Query("SELECT * FROM drinkInfo")
+    fun pagingSource(): PagingSource<Int, DrinkInfoEntity>
 
-    @Query("SELECT * FROM profileInfo")
-    fun getProfileInfo(): ProfileInfo?
+    @Insert()
+    fun insertDrinksInfo(entityDrinksInfo: List<DrinkInfoEntity>)
 
-    @Query("SELECT * FROM pictureInfo")
-    fun getPictureInfo(): List<EntityPictureInfo>
+    @Query("SELECT * FROM favoriteDrinks")
+    fun getFavoriteDrinks(): List<FavoriteDrink>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertFavoriteDrink(favoriteDrink: FavoriteDrink)
+
+    @Query("DELETE FROM favoriteDrinks WHERE id = :deleteId")
+    fun deleteFavoriteDrink(deleteId: String)
 
     @Insert
     fun insertPicturesInfo(entityPictureInfo: List<EntityPictureInfo>)
@@ -30,7 +35,10 @@ interface AppDao {
     @Query("DELETE FROM pictureInfo WHERE id = :pictureId")
     fun deletePicturesInfo(pictureId: String)
 
-    @Query("DELETE FROM pictureInfo")
+    @Query("DELETE FROM drinkInfo")
     fun deleteAllMenuItems()
+
+    @Query("SELECT * FROM pictureInfo")
+    fun getPictureInfo(): List<EntityPictureInfo>
 
 }

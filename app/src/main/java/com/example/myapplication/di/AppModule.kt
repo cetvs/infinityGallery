@@ -1,12 +1,18 @@
 package com.example.myapplication.di
 
 import android.app.Application
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import androidx.room.Room
 import com.example.myapplication.data.repository.MainRepositoryImpl
-import com.example.myapplication.data.repository.MockMainRepositoryImpl
 import com.example.myapplication.data.source.local.AppDatabase
+import com.example.myapplication.data.source.local.DrinkInfoEntity
 import com.example.myapplication.data.source.remote.Constants
+import com.example.myapplication.data.source.remote.DrinkRemoteMediator
+import com.example.myapplication.data.source.remote.DrinksApi
 import com.example.myapplication.data.source.remote.SimpleApi
+import com.example.myapplication.domain.model.DrinkInfoRemote
 import com.example.myapplication.domain.repository.MainRepository
 import com.example.myapplication.domain.usecase.*
 import dagger.Module
@@ -35,42 +41,51 @@ object AppModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(Constants.DRINKS_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideSimpleApi(retrofit: Retrofit): SimpleApi {
-        return retrofit.create(SimpleApi::class.java)
+    fun provideSimpleApi(retrofit: Retrofit): DrinksApi {
+        return retrofit.create(DrinksApi::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideRepositoryDatabase(db: AppDatabase, simpleApi: SimpleApi): MainRepository {
-        return MockMainRepositoryImpl(db.menuDao(), simpleApi)
+    fun provideRepositoryDatabase(db: AppDatabase, drinksApi: DrinksApi): MainRepository {
+        return MainRepositoryImpl(db.menuDao(), drinksApi)
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideRepositoryDatabase(db: AppDatabase, simpleApi: SimpleApi): MainRepository {
-//        return MainRepositoryImpl(db.menuDao(), simpleApi)
-//    }
+    @OptIn(ExperimentalPagingApi::class)
+    @Provides
+    @Singleton
+    fun provideDrinkPager(drinksDb: AppDatabase, drinksApi: DrinksApi): Pager<Int, DrinkInfoEntity> {
+        return Pager(
+            config = PagingConfig(pageSize = 20),
+            remoteMediator = DrinkRemoteMediator(
+                drinksDb = drinksDb,
+                drinksApi = drinksApi
+            ),
+            pagingSourceFactory = {
+                drinksDb.menuDao().pagingSource()
+            }
+        )
+    }
 
     @Provides
     @Singleton
     fun provideMenuUseCases(mainRepository: MainRepository): MainUseCases {
         return MainUseCases(
-            getProfileInfo = GetProfileInfo(mainRepository),
-            getPictureInfo = GetPictureInfo(mainRepository),
-            postAuthLogout = PostAuthLogout(mainRepository),
-            getLocalProfileInfo = GetLocalProfileInfo(mainRepository),
+//            getDrinksInfoPaging = GetDrinksInfoPaging() ,
+            getDrinksInfoRemote = GetDrinksInfoRemote(mainRepository),
+            getFavoriteDrink = GetFavoriteDrink(mainRepository),
+            insertFavoriteDrink = InsertFavoriteDrink(mainRepository),
+            deleteFavoriteDrink = DeleteFavoriteDrink(mainRepository),
             getLocalPictureInfo = GetLocalPictureInfo(mainRepository),
-            insertProfileInfo = InsertProfileInfo(mainRepository),
             insertPicturesInfo = InsertPicturesInfo(mainRepository),
             deletePictureInfo = DeletePictureInfo(mainRepository),
-            deleteProfileInfo = DeleteProfileInfo(mainRepository),
             deleteAllMenuItems = DeleteAllMenuItems(mainRepository),
         )
     }

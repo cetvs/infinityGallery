@@ -105,30 +105,7 @@ fun LoginButton(
     activity: Activity?
 ) {
     Button(
-        onClick = {
-            val profileInfo = mainViewModel.getProfileInfo(
-//                        ProfileRequestBody(
-//                            loginTextState.value.phoneToString(),
-//                            passwordTextState.value
-//                        )
-                //TODO("")
-                ProfileRequestBody("+79876543219", "qwerty")
-            )
-            when (profileInfo.message) {
-                null -> {
-                    mainViewModel.insertProfileInfo(profileInfo.data!!)
-                    val intent = Intent(context, MainActivity::class.java)
-                    context.startActivity(intent)
-                    activity?.finish()
-                }
-                BAD_REQUEST -> {
-                    errorMessage.value = "Логин или пароль введен неправильно"
-                }
-                HAVE_NOT_INTERNET -> {
-                    errorMessage.value = "Отсутствует соединение с интернетом"
-                }
-            }
-        },
+        onClick = {},
         modifier = Modifier.size(380.dp, 48.dp),
         colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
     ) {

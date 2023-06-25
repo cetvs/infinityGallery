@@ -19,7 +19,8 @@ import com.example.myapplication.presentation.MainViewModel
 
 @Composable
 fun FavoriteScreen(mainViewModel: MainViewModel = hiltViewModel()) {
-    val favorite = mainViewModel.getLocalPictureInfo()
+    val favorite = mutableListOf<EntityPictureInfo>()//TODO FAVORITES
+        // mainViewModel.getLocalPictureInfo()
     Column() {
         TopBarText(text = "Мои избранные")
         LazyColumn() {

@@ -28,7 +28,6 @@ import com.example.myapplication.common.transformToPhone
 import com.example.myapplication.domain.model.ProfileInfo
 import com.example.myapplication.domain.model.UserInfo
 import com.example.myapplication.presentation.MainViewModel
-import com.example.myapplication.presentation.home.profile_screen.DialogProfile
 import com.example.myapplication.presentation.ui.theme.Purple
 
 @ExperimentalComposeUiApi
@@ -47,7 +46,6 @@ fun ProfileScreen(profileInfo: ProfileInfo, mainViewModel: MainViewModel = hiltV
     }
 
     if (isOpenDialog.value) {
-        DialogProfile(isOpenDialog, errorMessage, mainViewModel, profileInfo.token)
     }
 }
 

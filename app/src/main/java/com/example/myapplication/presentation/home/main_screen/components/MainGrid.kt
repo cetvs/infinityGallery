@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.myapplication.R
 import com.example.myapplication.common.URLParser
+import com.example.myapplication.domain.model.DrinkInfoRemote
 import com.example.myapplication.domain.model.EntityPictureInfo
 import com.example.myapplication.domain.model.PictureInfo
 import com.example.myapplication.domain.model.toEntityPictureInfo
@@ -28,16 +29,19 @@ import com.google.gson.Gson
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
-lateinit var favorites: MutableList<EntityPictureInfo>
+private lateinit var favorites: MutableList<EntityPictureInfo>
 
 @ExperimentalFoundationApi
 @Composable
-fun MainGrid(navController: NavController, token: String, mainViewModel: MainViewModel) {
-    val picturesState = mainViewModel.state.value
-    favorites = mainViewModel.getLocalPictureInfo().toMutableList()
+fun MainGrid(navController: NavController, mainViewModel: MainViewModel) {
+    val drinksState = mainViewModel.stateDrinks.value
+    favorites = mutableListOf<EntityPictureInfo>() //mainViewModel.getLocalPictureInfo().toMutableList()
+
+    val drinkPagingFlow by mainViewModel.drinkPagingFlow.collectAsState(initial = null)
+    
     SwipeRefresh(
         state = rememberSwipeRefreshState(false),
-        onRefresh = { mainViewModel.getPictureInfo(token) },
+        onRefresh = {},
     ) {
         LazyVerticalGrid(
             cells = GridCells.Fixed(2),
@@ -46,9 +50,9 @@ fun MainGrid(navController: NavController, token: String, mainViewModel: MainVie
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(
-                count = picturesState.value.size,
+                count = drinksState.value.size,
                 itemContent = {
-                    MainGridListItem(picturesState.value[it], navController, mainViewModel)
+                    MainGridListItem(drinksState.value[it], navController, mainViewModel)
                 }
             )
         }
@@ -56,49 +60,55 @@ fun MainGrid(navController: NavController, token: String, mainViewModel: MainVie
 }
 
 @Composable
-fun MainGridListItem(
-    menuItem: PictureInfo,
+private fun MainGridListItem(
+    menuItem: DrinkInfoRemote,
     navController: NavController,
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel,
 ) {
     Column(
         Modifier.clickable {
-            val encodeUrl = URLParser('^').encode(menuItem.photoUrl)
-            val pictureInfo = menuItem.copy(photoUrl = encodeUrl)
-            val gsonPictureInfo = Gson().toJson(pictureInfo)
+            val encodeUrl = URLParser('^').encode(menuItem.imageUrl)
+            val drinkInfoRemote = menuItem.copy(imageUrl = encodeUrl)
+            val gsonPictureInfo = Gson().toJson(drinkInfoRemote)
             navController.navigate("${NavItem.Details.route}/$gsonPictureInfo")
         }
     ) {
         MainGridListImage(menuItem = menuItem, mainViewModel = mainViewModel)
-        Text(text = menuItem.title)
+        Text(text = menuItem.name)
     }
 }
 
 @Composable
-fun MainGridListImage(menuItem: PictureInfo, mainViewModel: MainViewModel) {
-    val foundedIndex = favorites.indexOfFirst { it.id == menuItem.id }
-    val icon = if (foundedIndex == -1) R.drawable.ic_unfavorite else R.drawable.ic_favorite
+private fun MainGridListImage(menuItem: DrinkInfoRemote, mainViewModel: MainViewModel) {
+//  TODO
+    val foundedIndex = favorites.indexOfFirst { it.id == menuItem.id.toString() } //foundedIndex
+    val icon =
+        if (foundedIndex == -1) {
+            R.drawable.ic_unfavorite
+        } else {
+            R.drawable.ic_favorite
+        }
     var favoriteIcon by remember { mutableStateOf(icon) }
     favoriteIcon = icon
     val scale = 1.1
     Box() {
         AsyncImage(
-            model = menuItem.photoUrl,
+            model = menuItem.imageUrl,
             contentDescription = null,
             modifier = Modifier.size((160 * scale).dp, (222 * scale).dp)
         )
         IconButton(
             onClick = {
-                val index = favorites.indexOfFirst { it.id == menuItem.id }
-                if ((index == -1)) {
-                    favoriteIcon = R.drawable.ic_favorite
-                    favorites.add(menuItem.toEntityPictureInfo())
-                    mainViewModel.insertPictureInfo(picturesInfo = listOf(menuItem.toEntityPictureInfo()))
-                } else {
-                    favoriteIcon = R.drawable.ic_unfavorite
-                    favorites.removeAt(index)
-                    mainViewModel.deletePictureInfo(menuItem.id)
-                }
+                val index = favorites.indexOfFirst { it.id == menuItem.id.toString()  }
+//                if ((index == -1)) {
+//                    favoriteIcon = R.drawable.ic_favorite
+//                    favorites.add(menuItem.toEntityPictureInfo())
+//                    mainViewModel.insertPictureInfo(picturesInfo = listOf(menuItem.toEntityPictureInfo()))
+//                } else {
+//                    favoriteIcon = R.drawable.ic_unfavorite
+//                    favorites.removeAt(index)
+//                    mainViewModel.deletePictureInfo(menuItem.id)
+//                }
             },
             modifier = Modifier.padding(130.dp, 0.dp, 0.dp, 0.dp),
         ) {

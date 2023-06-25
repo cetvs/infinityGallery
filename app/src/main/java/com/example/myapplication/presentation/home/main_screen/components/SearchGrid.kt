@@ -34,27 +34,29 @@ fun SearchGrid(navController: NavController, token: String, mainViewModel: MainV
 //    )
 //    mainViewModel.insertPicturesInfo(listOf(pictureInfo))
 
-    val picturesLocalState = mainViewModel.localState.value
+//    val picturesLocalState = mainViewModel.localState.value
 //    Log.v("pictures", picturesLocalState.size.toString())
-    mainViewModel.getLocalPictureInfo()
-    SwipeRefresh(
-        state = rememberSwipeRefreshState(false),
-        onRefresh = { mainViewModel.getPictureInfo(token) },
-    ) {
-        LazyVerticalGrid(
-            cells = GridCells.Fixed(2),
-            modifier = Modifier.padding(16.dp, 16.dp, 0.dp, 16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            items(
-                count = picturesLocalState.size,
-                itemContent = {
-                    SearchGridListItem(picturesLocalState[it], navController)
-                }
-            )
-        }
-    }
+//    mainViewModel.getLocalPictureInfo()
+//    SwipeRefresh(
+//        state = rememberSwipeRefreshState(false),
+//        onRefresh = {
+////            mainViewModel.getPictureInfo(token)
+//                    },
+//    ) {
+//        LazyVerticalGrid(
+//            cells = GridCells.Fixed(2),
+//            modifier = Modifier.padding(16.dp, 16.dp, 0.dp, 16.dp),
+//            verticalArrangement = Arrangement.spacedBy(8.dp),
+//            horizontalArrangement = Arrangement.spacedBy(8.dp),
+//        ) {
+//            items(
+//                count = picturesLocalState.size,
+//                itemContent = {
+//                    SearchGridListItem(picturesLocalState[it], navController)
+//                }
+//            )
+//        }
+//    }
 }
 
 @Composable
