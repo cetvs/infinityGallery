@@ -9,19 +9,19 @@ sealed class NavItem(
 ) {
     object Main : NavItem(
         route = "main",
-        name = "Главная",
+        name = "Home",
         icon = R.drawable.ic_main
     )
 
     object Favorite : NavItem(
         route = "favorite",
-        name = "Избранное",
+        name = "Favorites",
         icon = R.drawable.ic_unfavorite
     )
 
     object Profile : NavItem(
         route = "profile",
-        name = "Профиль",
+        name = "Profile",
         icon = R.drawable.ic_profile
     )
 
