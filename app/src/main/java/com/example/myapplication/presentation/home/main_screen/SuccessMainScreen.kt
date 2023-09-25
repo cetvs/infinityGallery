@@ -27,7 +27,7 @@ fun SuccessMainScreen(navController: NavController, token: String, mainViewModel
                 contentColor = Color.Black,
                 title = {
                     Text(
-                        text = "Gallery",
+                        text = "Галерея",
                         fontSize = 24.sp
                     )
                 },
