@@ -78,15 +78,10 @@ object AppModule {
     @Singleton
     fun provideMenuUseCases(mainRepository: MainRepository): MainUseCases {
         return MainUseCases(
-//            getDrinksInfoPaging = GetDrinksInfoPaging() ,
             getDrinksInfoRemote = GetDrinksInfoRemote(mainRepository),
             getFavoriteDrink = GetFavoriteDrink(mainRepository),
             insertFavoriteDrink = InsertFavoriteDrink(mainRepository),
             deleteFavoriteDrink = DeleteFavoriteDrink(mainRepository),
-            getLocalPictureInfo = GetLocalPictureInfo(mainRepository),
-            insertPicturesInfo = InsertPicturesInfo(mainRepository),
-            deletePictureInfo = DeletePictureInfo(mainRepository),
-            deleteAllMenuItems = DeleteAllMenuItems(mainRepository),
         )
     }
 }

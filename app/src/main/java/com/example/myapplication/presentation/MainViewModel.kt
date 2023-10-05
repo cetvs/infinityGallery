@@ -35,9 +35,6 @@ class MainViewModel @Inject constructor(
         }
         .cachedIn(viewModelScope)
 
-    private val _localStateFavorite = mutableStateOf(listOf<EntityPictureInfo>())
-    val localStateFavorite: State<List<EntityPictureInfo>> = _localStateFavorite
-
     private val _stateDrinks = mutableStateOf(DrinksInfoListState())
     val stateDrinks: State<DrinksInfoListState> = _stateDrinks
 
@@ -51,18 +48,6 @@ class MainViewModel @Inject constructor(
     fun getFavoriteDrink() : List<FavoriteDrink> {
        return runBlocking(Dispatchers.IO) {
             mainUseCases.getFavoriteDrink()
-        }
-    }
-
-    fun insertPictureInfo(picturesInfo: List<EntityPictureInfo>) {
-        viewModelScope.launch(Dispatchers.IO) {
-            mainUseCases.insertPicturesInfo(picturesInfo)
-        }
-    }
-
-    fun deletePictureInfo(id: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            mainUseCases.deletePictureInfo(id)
         }
     }
 

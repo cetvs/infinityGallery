@@ -74,12 +74,6 @@ fun RegistrationScreen(
             val isPasswordVisibleState = remember { mutableStateOf(false) }
             PasswordTextField(isPasswordVisibleState, passwordTextState, isClick)
             if (isClick && passwordTextState.value.isBlank()) TextIfTextFieldIsEmpty()
-//            Image(
-//                painter = painterResource(R.drawable.ic_surf_edu),
-//                contentDescription = null,
-//                modifier = Modifier.size(230.dp),
-//                colorFilter = ColorFilter.tint(SurfEduColor)
-//            )
         }
         Column(
             modifier = Modifier

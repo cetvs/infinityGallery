@@ -7,8 +7,5 @@ interface MainRepository {
     suspend fun getFavoriteDrink(): List<FavoriteDrink>
     fun insertFavoriteDrink(favoriteDrink: FavoriteDrink)
     fun deleteFavoriteDrink(id: String)
-    fun getLocalPictureInfo(): List<EntityPictureInfo>
-    fun insertPicturesInfo(picturesInfo: List<EntityPictureInfo>)
     fun deleteAllMenuItems()
-    fun deletePictureInfo(id: String)
 }

@@ -100,15 +100,6 @@ private fun MainGridListImage(menuItem: DrinkInfoRemote, mainViewModel: MainView
         IconButton(
             onClick = {
                 val index = favorites.indexOfFirst { it.id == menuItem.id.toString()  }
-//                if ((index == -1)) {
-//                    favoriteIcon = R.drawable.ic_favorite
-//                    favorites.add(menuItem.toEntityPictureInfo())
-//                    mainViewModel.insertPictureInfo(picturesInfo = listOf(menuItem.toEntityPictureInfo()))
-//                } else {
-//                    favoriteIcon = R.drawable.ic_unfavorite
-//                    favorites.removeAt(index)
-//                    mainViewModel.deletePictureInfo(menuItem.id)
-//                }
             },
             modifier = Modifier.padding(130.dp, 0.dp, 0.dp, 0.dp),
         ) {

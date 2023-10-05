@@ -9,7 +9,7 @@ import com.example.myapplication.domain.model.EntityPictureInfo
 import com.example.myapplication.domain.model.FavoriteDrink
 
 @Dao
-interface AppDao {
+interface DrinkDao {
 
     @Query("SELECT * FROM drinkInfo")
     fun pagingSource(): PagingSource<Int, DrinkInfoEntity>
@@ -26,19 +26,7 @@ interface AppDao {
     @Query("DELETE FROM favoriteDrinks WHERE id = :deleteId")
     fun deleteFavoriteDrink(deleteId: String)
 
-    @Insert
-    fun insertPicturesInfo(entityPictureInfo: List<EntityPictureInfo>)
-
-    @Insert
-    fun updateFavoritePictureInfo(entityPictureInfo: EntityPictureInfo)
-
-    @Query("DELETE FROM pictureInfo WHERE id = :pictureId")
-    fun deletePicturesInfo(pictureId: String)
-
     @Query("DELETE FROM drinkInfo")
     fun deleteAllMenuItems()
-
-    @Query("SELECT * FROM pictureInfo")
-    fun getPictureInfo(): List<EntityPictureInfo>
 
 }

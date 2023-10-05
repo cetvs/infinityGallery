@@ -16,7 +16,6 @@ import com.example.myapplication.presentation.home.components.FavoriteScreen
 import com.example.myapplication.presentation.home.components.MainScreen
 import com.example.myapplication.presentation.home.components.ProfileScreen
 import com.example.myapplication.presentation.home.main_screen.MainInfoDetailsScreen
-import com.example.myapplication.presentation.home.main_screen.SearchScreen
 import com.example.myapplication.presentation.home.models.NavItem
 import com.google.gson.Gson
 
@@ -49,11 +48,6 @@ fun HomeNavGraph(navController: NavHostController) {
             val drinkInfo = Gson().fromJson(jsonPictureInfo, DrinksInfoUi::class.java)
             val decodedDrink = drinkInfo.copy(imageUrl = URLParser('^').decode(drinkInfo.imageUrl))
             MainInfoDetailsScreen(navController, decodedDrink)
-        }
-        composable(
-            route = NavItem.Search.route
-        ) {
-            SearchScreen(navController, "token")
         }
     }
 }

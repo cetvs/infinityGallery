@@ -2,7 +2,6 @@ package com.example.myapplication.data.source.remote
 
 import android.util.Log
 import androidx.paging.ExperimentalPagingApi
-import androidx.paging.LoadState.Loading.endOfPaginationReached
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
@@ -10,7 +9,6 @@ import androidx.room.withTransaction
 import com.example.myapplication.data.source.local.AppDatabase
 import com.example.myapplication.data.source.local.DrinkInfoEntity
 import com.example.myapplication.data.source.mappers.toDrinkInfoEntity
-import kotlinx.coroutines.delay
 import retrofit2.HttpException
 import java.io.IOException
 
